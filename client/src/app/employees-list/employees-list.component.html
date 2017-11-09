@@ -1,0 +1,13 @@
+<mat-card>
+  <h2>List of Employees</h2>
+  <button mat-raised-button color="primary" (click)="openDialog()">Add employee</button>
+  <ul *ngIf="employees">
+    <div *ngFor="let emp of employees">
+       Id: {{ emp.id }} <br>
+       FIO: {{ emp.FIO }} <br>
+       Sex: {{ emp.Sex }} <br>
+       Adress: {{ emp.Adress }} <br>
+       <hr>
+    </div>
+  </ul>
+</mat-card>

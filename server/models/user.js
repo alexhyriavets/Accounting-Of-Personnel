@@ -20,6 +20,31 @@ module.exports.getAllUsers = () => {
     });
 }
 
+module.exports.getFIOs = () => {
+    return new Promise ((resolve, reject) => {
+        connection.query('select * from person', (err, rows, fields) => {
+            if (err) return reject(err);
+            else resolve (rows); 
+        });
+    });
+}
+
+module.exports.addEmployee = (data, callback) => {
+    connection.query('insert into person set ?', data, callback);
+}
+
+module.exports.sendResponse = function(success, res) {
+    if (success) {
+        res.send({ 'success': 'true' });
+    } else {
+        res.send({ 'success': 'false' });
+    }
+}
+
+// module.exports.addDiscipline = function(data, callback) {
+//     connection.query("INSERT INTO disciplines SET ?", data, callback);
+// }
+
 // module.exports.findAll = function() {
 //     return new Promise(function(resolve, c) {
 //         connection.query("SELECT * FROM users ORDER BY id DESC", function(err, rows, fields) {

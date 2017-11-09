@@ -1,0 +1,38 @@
+<h1>Add new Employee</h1>
+<div class="form-wrap">
+
+  <mat-form-field>
+    <input [(ngModel)]="this.employee.FIO" matInput placeholder="FIO" required>
+  </mat-form-field>
+
+  <mat-radio-group class="radio-wrap" [(ngModel)]="this.employee.Sex" required>
+    <mat-radio-button name="gender" value="male">Male</mat-radio-button>
+    <mat-radio-button name="gender" value="female">Female</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field>
+    <input [(ngModel)]="this.employee.Date_of_Birthday" matInput [matDatepicker]="picker1" placeholder="Date of Birthday">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input [(ngModel)]="this.employee.Adress" matInput placeholder="Adress" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input [(ngModel)]="this.employee.Date_of_Dismissal" matInput [matDatepicker]="picker2" placeholder="Date of Dismissal">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input [(ngModel)]="this.employee.Science_Degree" matInput placeholder="Science degree" required>
+  </mat-form-field>
+
+  <div class="form-controls">
+    <button mat-raised-button color="accent" (click)="onSubmit()">Add</button>
+    <button mat-raised-button color="primary" (click)="onNoClick()">Cancel</button>
+  </div>
+
+</div>
