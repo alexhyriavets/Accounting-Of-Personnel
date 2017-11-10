@@ -22,7 +22,7 @@ import { EmployeeService } from './shared/employee.service';
     SharedModule,
     AppRouterModule,
     FormsModule,
-    HttpModule
+    HttpModule,
   ],
   entryComponents: [ AddEmployeeComponent ],
   providers: [ EmployeeService, HttpModule ],
