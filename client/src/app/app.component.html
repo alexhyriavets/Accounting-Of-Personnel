@@ -1,10 +1,9 @@
 <mat-card class="header-wrap">
     <h1 class="page-title">Accounting of Personnel</h1>
-    <nav>
-        <a mat-raised-button color="primary">Add</a>
-        <a mat-raised-button color="primary">Delete</a>
-        <a mat-raised-button color="primary" routerLink="/list">List</a>
-    </nav>
+    <div class="info" *ngIf="this.router.url !== '/signin'">
+        <span>{{ authService.currentUser.name }} {{ authService.currentUser.surname }} </span>
+        <i class="material-icons" (click)="authService.logout()">exit_to_app</i>
+    </div>
 </mat-card>
 
 <router-outlet></router-outlet>

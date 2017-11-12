@@ -7,6 +7,7 @@ var connection = mysql.createConnection({
     database: 'coursework'
 });
 
+
 connection.connect(function() {
     console.log("Database connected");
 });
@@ -14,7 +15,9 @@ connection.connect(function() {
 module.exports.getAllUsers = () => {
     return new Promise((resolve, c) => {
         connection.query('select * from users', (err, rows, fields) => {
+            console.log(`on getAllUsers we above if`);
             if (err) return resolve(err);
+            console.log(`on getAllUsers we`);
             resolve(rows);
         });
     });
@@ -23,7 +26,10 @@ module.exports.getAllUsers = () => {
 module.exports.getFIOs = () => {
     return new Promise ((resolve, reject) => {
         connection.query('select * from person', (err, rows, fields) => {
-            if (err) return reject(err);
+            if (err) {
+                console.log(`error in getFios()`);
+                return reject(err);
+            }
             else resolve (rows); 
         });
     });

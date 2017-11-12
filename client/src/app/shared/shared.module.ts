@@ -10,6 +10,7 @@ import { MatButtonModule,
          MatRadioModule,
          MatDatepickerModule,
          MatNativeDateModule,
+         MatIconModule,
 } from '@angular/material';
 
 @NgModule({
@@ -23,6 +24,7 @@ import { MatButtonModule,
         MatRadioModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatIconModule,
     ],
     exports: [
         BrowserAnimationsModule,
@@ -34,6 +36,7 @@ import { MatButtonModule,
         MatRadioModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatIconModule,
     ]
 })
 export class SharedModule { }

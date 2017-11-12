@@ -9,14 +9,17 @@ import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { EmployeesListComponent } from './employees-list/employees-list.component';
 import { AddEmployeeComponent } from './shared/add-employee/add-employee.component';
+import { MenuComponent } from './menu/menu.component';
 
 import { EmployeeService } from './shared/employee.service';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesListComponent,
-    AddEmployeeComponent
+    AddEmployeeComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,7 @@ import { EmployeeService } from './shared/employee.service';
     AuthModule,
   ],
   entryComponents: [ AddEmployeeComponent ],
-  providers: [ EmployeeService, HttpModule ],
+  providers: [ EmployeeService, HttpModule, AuthService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
