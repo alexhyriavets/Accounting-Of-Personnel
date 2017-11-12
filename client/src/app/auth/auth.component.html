@@ -1,0 +1,17 @@
+<div class="form-wrap">
+  <h1>Sign in</h1>
+
+  <form (ngSubmit)="signin()" novalidate class="form">
+
+    <mat-form-field>
+      <input required matInput placeholder="Username" [(ngModel)]="user.username" name="username">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input required matInput placeholder="Password" [(ngModel)]="user.password" name="password">
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+  </form>
+
+</div>

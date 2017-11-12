@@ -34,6 +34,63 @@ app.post('/add_emp', (req, res) => {
     });
 })
 
+app.post('/login', async function(req, res, nex) {
+    const params = req.body;
+    let users = null;
+
+    users = await user.getAllUsers();
+
+    const filteredUsers = users.filter(u => {
+        return u.username === params.username &&
+               u.password == params.password;
+    })
+
+    if (filteredUsers.length) {
+        let user = filteredUsers[0];
+        res.json({
+            id: user.id,
+            name: user.name,
+            surname: user.surname,
+            token: 'fake-jwt-token'
+        });
+    } else {
+        res.statusMessage = "Username or password or role is incorrect";
+        res.status(400).end();
+    }
+
+});
+
+// app.post('/login', async function(req, res, next) {
+//     res.setHeader('Content-Type', 'application/json');
+//     let params = req.body;
+//     let users = null;
+//     users = await user.findAll();
+
+//     console.log(params); // Ok, data is here
+
+//     let filteredUsers = users.filter(u => {
+//         return u.username === params.username &&
+//             user.compare(u.password, params.password);
+//     });
+
+//     if (filteredUsers.length) {
+//         // if login details are valid return 200 OK with user details and fake jwt token
+//         let user = filteredUsers[0];
+//         res.json({
+//             id: user.id,
+//             email: user.email,
+//             name: user.name,
+//             surname: user.surname,
+//             token: 'fake-jwt-token'
+//         });
+
+//     } else {
+//         // else return 400 bad request
+//         res.statusMessage = "Username or password or role is incorrect";
+//         res.status(400).end();
+//     }
+// });
+
 // app.post('/create_disc', (req, res) => {
 //     var data = req.body;
 //     user.findByDiscipline(data.name, function(err, rows, fields) {
