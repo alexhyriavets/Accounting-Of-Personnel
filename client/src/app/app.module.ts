@@ -14,12 +14,15 @@ import { MenuComponent } from './menu/menu.component';
 import { EmployeeService } from './shared/employee.service';
 import { AuthService } from './auth/auth.service';
 
+import { FilterPipe } from './employees-list/filter.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesListComponent,
     AddEmployeeComponent,
-    MenuComponent
+    MenuComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

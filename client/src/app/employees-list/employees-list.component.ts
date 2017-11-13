@@ -13,7 +13,9 @@ import { EmployeeService } from './../shared/employee.service';
   styleUrls: ['./employees-list.component.sass']
 })
 export class EmployeesListComponent implements OnInit {
+  displayedRows = ['ID', 'Name', 'Sex', 'Adress'];
   employees: Employee[];
+  searchText: string;
 
   constructor(
     public employeeService: EmployeeService,

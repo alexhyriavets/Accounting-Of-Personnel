@@ -1,5 +1,55 @@
 <mat-card>
   <h2>List of Employees</h2>
+  <div class="search-wrap">
+    <mat-form-field>
+      <input class="search" matInput [(ngModel)]="searchText" placeholder="Search">
+    </mat-form-field>
+  </div>
+  <div class="table-wrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th *ngFor="let row of displayedRows">{{ row }}</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="employees">
+        <tr *ngFor="let emp of employees | filter : searchText" class="row">
+          <td>{{ emp.id }}</td>
+          <td>{{ emp.FIO }}</td>
+          <td>{{ emp.Sex }}</td>
+          <td>{{ emp.Adress }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</mat-card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-card>
+  <h2>List of Employees</h2>
   <button mat-raised-button color="primary" (click)="openDialog()">Add employee</button>
   <ul *ngIf="employees">
     <div *ngFor="let emp of employees">
@@ -10,4 +60,4 @@
        <hr>
     </div>
   </ul>
-</mat-card>
+</mat-card> -->
