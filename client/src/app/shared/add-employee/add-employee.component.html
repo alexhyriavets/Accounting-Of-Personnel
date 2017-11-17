@@ -1,4 +1,43 @@
-<h1>Add new Employee</h1>
+<h2>Add new Employee</h2>
+<div class="form-wrap">
+  <form [formGroup]="rForm" (ngSubmit)="addEmployee(rFrom.value)">
+    
+    <mat-form-field>
+      <input matInput type="text" formControlName="FIO" placeholder="FIO">
+    </mat-form-field>
+
+    <mat-radio-group class="radio-wrap">
+      <mat-radio-button name="sex" formControlName="Sex" value="male">Male</mat-radio-button>
+      <mat-radio-button name="sex" formControlName="Sex" value="female">Female</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field>
+      <input formControlName="Date_of_Birth" matInput [matDatepicker]="picker1" placeholder="Date of Birthday">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input formControlName="Adress" matInput placeholder="Adress" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input formControlName="Date_of_Dismissal" matInput [matDatepicker]="picker2" placeholder="Date of Dismissal">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input formControlName="Science_Degree" matInput placeholder="Science degree">
+    </mat-form-field>
+
+    <input type="submit" mat-raised-button color="accent" value="Submit">
+    <button mat-raised-button color="primary" (click)="onNoClick()">Close</button>
+  </form>
+</div>
+
+
+<!-- <h1>Add new Employee</h1>
 <div class="form-wrap">
 
   <mat-form-field>
@@ -35,4 +74,4 @@
     <button mat-raised-button color="primary" (click)="onNoClick()">Cancel</button>
   </div>
 
-</div>
+</div> -->

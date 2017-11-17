@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
 import { AppRouterModule } from './app-router.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AuthModule } from './auth/auth.module';
 
@@ -31,6 +31,7 @@ import { FilterPipe } from './employees-list/filter.pipe';
     FormsModule,
     HttpModule,
     AuthModule,
+    ReactiveFormsModule,
   ],
   entryComponents: [ AddEmployeeComponent ],
   providers: [ EmployeeService, HttpModule, AuthService ],

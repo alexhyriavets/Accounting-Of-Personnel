@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject, NgModule } from '@angular/core';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 
 import { Employee } from './../../models/employee';
 
 import { EmployeeService } from './../employee.service';
+import { FormControl } from '@angular/forms/src/model';
 
 @Component({
   selector: 'app-add-employee',
@@ -13,16 +14,33 @@ import { EmployeeService } from './../employee.service';
   styleUrls: ['./add-employee.component.sass']
 })
 export class AddEmployeeComponent implements OnInit {
-  employee: any = {};
+  employee: any;
+  rForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<AddEmployeeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private employeeService: EmployeeService
-  ) { }
+    private employeeService: EmployeeService,
+    private formBuilder: FormBuilder
+  ) {
+    this.rForm = this.formBuilder.group({
+      'FIO': [null, Validators.required],
+      'Sex': '',
+      'Date_of_Birth': [null, Validators.required],
+      'Adress': [null, Validators.required],
+      'Date_of_Dismissal': [null, Validators.required],
+      'Science_Degree': [null, Validators.required],
+    });
+  }
 
   ngOnInit() { }
 
+  // new version of forms
+  addEmployee(emp) {
+    console.log(emp);
+  }
+
+  // old version of forms
   onSubmit(): void {
     if (this.employee.Date_of_Birth) {
       this.employee.Date_of_Birth = this.formatDate(this.employee.Date_of_Birth.toDateString());
