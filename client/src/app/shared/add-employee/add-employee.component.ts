@@ -1,7 +1,11 @@
+// TODO: make validation work with form below!
+
 import { Component, OnInit, Inject, NgModule } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+import { CustomValidators } from './../custom-validators';
+import { ShowErrorsComponent } from './../show-errors';
 
 import { Employee } from './../../models/employee';
 
@@ -16,6 +20,7 @@ import { FormControl } from '@angular/forms/src/model';
 export class AddEmployeeComponent implements OnInit {
   employee: any;
   rForm: FormGroup;
+  name: string;
 
   constructor(
     public dialogRef: MatDialogRef<AddEmployeeComponent>,
@@ -23,9 +28,9 @@ export class AddEmployeeComponent implements OnInit {
     private employeeService: EmployeeService,
     private formBuilder: FormBuilder
   ) {
-    this.rForm = this.formBuilder.group({
-      'FIO': [null, Validators.required],
-      'Sex': '',
+    this.rForm = formBuilder.group({
+      'FIO': [null, [Validators.required, CustomValidators.testFio]],
+      'Sex': [null, Validators.required],
       'Date_of_Birth': [null, Validators.required],
       'Adress': [null, Validators.required],
       'Date_of_Dismissal': [null, Validators.required],
@@ -38,6 +43,7 @@ export class AddEmployeeComponent implements OnInit {
   // new version of forms
   addEmployee(emp) {
     console.log(emp);
+    console.log(this.rForm.controls.FIO);
   }
 
   // old version of forms

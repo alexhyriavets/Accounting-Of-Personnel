@@ -16,13 +16,16 @@ import { AuthService } from './auth/auth.service';
 
 import { FilterPipe } from './employees-list/filter.pipe';
 
+import { ShowErrorsComponent } from './shared/show-errors';
+
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesListComponent,
     AddEmployeeComponent,
     MenuComponent,
-    FilterPipe
+    FilterPipe,
+    ShowErrorsComponent
   ],
   imports: [
     BrowserModule,

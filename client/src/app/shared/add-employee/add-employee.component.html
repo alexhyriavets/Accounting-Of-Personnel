@@ -1,14 +1,14 @@
 <h2>Add new Employee</h2>
-<div class="form-wrap">
-  <form [formGroup]="rForm" (ngSubmit)="addEmployee(rFrom.value)">
+<div>
+  <form class="form-wrap" [formGroup]="rForm" (ngSubmit)="addEmployee(rForm.value)" novalidate>
     
     <mat-form-field>
       <input matInput type="text" formControlName="FIO" placeholder="FIO">
     </mat-form-field>
-
-    <mat-radio-group class="radio-wrap">
-      <mat-radio-button name="sex" formControlName="Sex" value="male">Male</mat-radio-button>
-      <mat-radio-button name="sex" formControlName="Sex" value="female">Female</mat-radio-button>
+    <app-show-errors [control]="rForm.controls.FIO"></app-show-errors>
+    <mat-radio-group class="radio-wrap" formControlName="Sex">
+      <mat-radio-button name="sex" value="male">Male</mat-radio-button>
+      <mat-radio-button name="sex" value="female">Female</mat-radio-button>
     </mat-radio-group>
 
     <mat-form-field>
@@ -31,8 +31,10 @@
       <input formControlName="Science_Degree" matInput placeholder="Science degree">
     </mat-form-field>
 
-    <input type="submit" mat-raised-button color="accent" value="Submit">
-    <button mat-raised-button color="primary" (click)="onNoClick()">Close</button>
+    <div class="form-controls">
+      <button type="submit" mat-raised-button color="primary">Submit</button>
+      <button mat-raised-button color="primary" (click)="onNoClick()">Close</button>
+    </div>
   </form>
 </div>
 
