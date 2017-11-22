@@ -6,74 +6,40 @@
       <input matInput type="text" formControlName="FIO" placeholder="FIO">
     </mat-form-field>
     <app-show-errors [control]="rForm.controls.FIO"></app-show-errors>
+
     <mat-radio-group class="radio-wrap" formControlName="Sex">
       <mat-radio-button name="sex" value="male">Male</mat-radio-button>
       <mat-radio-button name="sex" value="female">Female</mat-radio-button>
     </mat-radio-group>
 
     <mat-form-field>
-      <input formControlName="Date_of_Birth" matInput [matDatepicker]="picker1" placeholder="Date of Birthday">
+      <input type="text" formControlName="Date_of_Birth" matInput [matDatepicker]="picker1" placeholder="Date of Birthday">
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
+    <!-- <app-show-errors [control]="rForm.controls.Date_of_Birth"></app-show-errors> -->
 
     <mat-form-field>
       <input formControlName="Adress" matInput placeholder="Adress" required>
     </mat-form-field>
+    <app-show-errors [control]="rForm.controls.Adress"></app-show-errors>
 
     <mat-form-field>
       <input formControlName="Date_of_Dismissal" matInput [matDatepicker]="picker2" placeholder="Date of Dismissal">
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
+    <app-show-errors [control]="rForm.controls.Date_of_Dismissal"></app-show-errors>
 
     <mat-form-field>
       <input formControlName="Science_Degree" matInput placeholder="Science degree">
     </mat-form-field>
+    <app-show-errors [control]="rForm.controls.Science_Degree"></app-show-errors>
 
     <div class="form-controls">
-      <button type="submit" mat-raised-button color="primary">Submit</button>
-      <button mat-raised-button color="primary" (click)="onNoClick()">Close</button>
+      <button type="submit" mat-raised-button color="accent" [disabled]="!rForm.valid">Submit</button>
+      <button routerLink="/menu" mat-raised-button color="primary">Close</button>
     </div>
   </form>
 </div>
 
-
-<!-- <h1>Add new Employee</h1>
-<div class="form-wrap">
-
-  <mat-form-field>
-    <input [(ngModel)]="this.employee.FIO" matInput placeholder="FIO" required>
-  </mat-form-field>
-
-  <mat-radio-group class="radio-wrap" [(ngModel)]="this.employee.Sex" required>
-    <mat-radio-button name="gender" value="male">Male</mat-radio-button>
-    <mat-radio-button name="gender" value="female">Female</mat-radio-button>
-  </mat-radio-group>
-
-  <mat-form-field>
-    <input [(ngModel)]="this.employee.Date_of_Birth" matInput [matDatepicker]="picker1" placeholder="Date of Birthday">
-    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field>
-    <input [(ngModel)]="this.employee.Adress" matInput placeholder="Adress" required>
-  </mat-form-field>
-
-  <mat-form-field>
-    <input [(ngModel)]="this.employee.Date_of_Dismissal" matInput [matDatepicker]="picker2" placeholder="Date of Dismissal">
-    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field>
-    <input [(ngModel)]="this.employee.Science_Degree" matInput placeholder="Science degree">
-  </mat-form-field>
-
-  <div class="form-controls">
-    <button mat-raised-button color="accent" (click)="onSubmit()">Add</button>
-    <button mat-raised-button color="primary" (click)="onNoClick()">Cancel</button>
-  </div>
-
-</div> -->

@@ -33,6 +33,7 @@ export class EmployeeService {
   }
 
   putEmployee(employee: Employee): any {
+    console.log(employee);
     return this.http.post(
       this.api_url + '/add_emp',
       JSON.stringify(employee),

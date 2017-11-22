@@ -17,10 +17,9 @@ export class ShowErrorsComponent {
     'maxlength': (params) => 'The max allowed number of characters is ' + params.requiredLength,
     'pattern': (params) => 'The required pattern is: ' + params.requiredPattern,
     'years': (params) => params.message,
-    'countryCity': (params) => params.message,
-    'uniqueName': (params) => params.message,
     'telephoneNumbers': (params) => params.message,
-    'testFio': (params) => params.message
+    'testFio': (params) => params.message,
+    'testDate': (params) => params.message
   };
 
   @Input()

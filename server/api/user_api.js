@@ -27,7 +27,7 @@ app.get('/get_fios', async(req, res) => {
 
 app.post('/add_emp', (req, res) => {
     const data = req.body;
-
+    console.log(data);
     user.addEmployee(data, (err, info) => {
         if (err) throw err;
         user.sendResponse(true, res);

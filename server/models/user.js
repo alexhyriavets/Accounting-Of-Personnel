@@ -33,6 +33,7 @@ module.exports.getFIOs = () => {
 }
 
 module.exports.addEmployee = (data, callback) => {
+    console.log(data);
     connection.query('insert into person set ?', data, callback);
 }
 

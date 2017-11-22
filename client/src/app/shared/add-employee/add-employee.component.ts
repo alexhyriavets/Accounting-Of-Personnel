@@ -2,7 +2,6 @@
 
 import { Component, OnInit, Inject, NgModule } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { CustomValidators } from './../custom-validators';
 import { ShowErrorsComponent } from './../show-errors';
@@ -23,8 +22,6 @@ export class AddEmployeeComponent implements OnInit {
   name: string;
 
   constructor(
-    public dialogRef: MatDialogRef<AddEmployeeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
     private employeeService: EmployeeService,
     private formBuilder: FormBuilder
   ) {
@@ -33,32 +30,25 @@ export class AddEmployeeComponent implements OnInit {
       'Sex': [null, Validators.required],
       'Date_of_Birth': [null, Validators.required],
       'Adress': [null, Validators.required],
-      'Date_of_Dismissal': [null, Validators.required],
-      'Science_Degree': [null, Validators.required],
+      'Date_of_Dismissal': [null],
+      'Science_Degree': [null],
     });
   }
 
   ngOnInit() { }
 
-  // new version of forms
   addEmployee(emp) {
-    console.log(emp);
-    console.log(this.rForm.controls.FIO);
-  }
-
-  // old version of forms
-  onSubmit(): void {
-    if (this.employee.Date_of_Birth) {
-      this.employee.Date_of_Birth = this.formatDate(this.employee.Date_of_Birth.toDateString());
+    if (emp.Date_of_Birth) {
+      emp.Date_of_Birth = this.formatDate(emp.Date_of_Birth.toDateString());
     }
-    if (this.employee.Date_of_Dismissal) {
-      this.employee.Date_of_Dismissal = this.formatDate(this.employee.Date_of_Dismissal.toDateString());
+    if (emp.Date_of_Dismissal) {
+      emp.Date_of_Dismissal = this.formatDate(emp.Date_of_Dismissal.toDateString());
     }
 
     // uncomment to add emplyees to database
-    this.employeeService.putEmployee(this.employee);
+    this.employeeService.putEmployee(emp);
 
-    this.dialogRef.close();
+    this.rForm.reset();
   }
 
   formatDate(date): string {
@@ -106,10 +96,6 @@ export class AddEmployeeComponent implements OnInit {
     }
 
     return year + '-' + month + '-' + day;
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
 }

@@ -13,4 +13,15 @@ export class CustomValidators {
 
         return isValid ? null : message;
     }
+
+    // static testDate(c: FormControl): ValidationErrors {
+    //     const isValid = /^\d\/+$/.test(c.value);
+    //     const message = {
+    //         'testDate': {
+    //             'message': 'Input date in YYYY-MM-DD format',
+    //         }
+    //     };
+
+    //     return isValid ? null : message;
+    // }
 }
