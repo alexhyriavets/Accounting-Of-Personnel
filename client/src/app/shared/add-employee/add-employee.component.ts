@@ -1,5 +1,3 @@
-// TODO: make validation work with form below!
-
 import { Component, OnInit, Inject, NgModule } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 

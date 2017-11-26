@@ -10,13 +10,14 @@ import { AppComponent } from './app.component';
 import { EmployeesListComponent } from './employees-list/employees-list.component';
 import { AddEmployeeComponent } from './shared/add-employee/add-employee.component';
 import { MenuComponent } from './menu/menu.component';
+import { ShowErrorsComponent } from './shared/show-errors';
+import { EmployeeDetailComponent } from './employees-list/employee-detail/employee-detail.component';
 
 import { EmployeeService } from './shared/employee.service';
 import { AuthService } from './auth/auth.service';
 
 import { FilterPipe } from './employees-list/filter.pipe';
 
-import { ShowErrorsComponent } from './shared/show-errors';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ShowErrorsComponent } from './shared/show-errors';
     AddEmployeeComponent,
     MenuComponent,
     FilterPipe,
-    ShowErrorsComponent
+    ShowErrorsComponent,
+    EmployeeDetailComponent
   ],
   imports: [
     BrowserModule,

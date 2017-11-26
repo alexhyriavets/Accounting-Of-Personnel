@@ -22,9 +22,20 @@ export class EmployeeService {
     return new Headers(headersConfig);
   }
 
+  // have to do something with async (no)
+  getEmployeeById(id): Observable<any> {
+    return this.http.get(`${this.api_url}/get_emp`, { headers: this.setHeaders() })
+    .map((response: Response) => response.json());
+  }
+
   getAllEmployees(): Observable<any> {
     return this.http.get(`${this.api_url}/get_emp`, { headers: this.setHeaders() })
       .map((response: Response) => response.json());
+  }
+
+  getFIOsById(id): Observable<any> {
+    return this.http.get(`${this.api_url}/get_fios`, { headers: this.setHeaders() })
+      .map((response: Response) => response.json().filter(res => res.id === id));
   }
 
   getFIOs(): Observable<any> {

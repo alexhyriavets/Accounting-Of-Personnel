@@ -1,8 +1,11 @@
 export class Employee {
-    fio: string;
-    sex: string;
-    adress: string;
-    dob: string;
-    degree: string;
-    dod: string;
+    firstName: string;
+    secondName: string;
+    patronymic: string;
+    tab_number: string;
+    subdivision: string;
+    department: string;
+    position: string;
+    employment: string;
+    salary: number;
 }

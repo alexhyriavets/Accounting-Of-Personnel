@@ -26,16 +26,16 @@ export class EmployeesListComponent implements OnInit {
     this.getEmployees();
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddEmployeeComponent, {
-      width: '500px',
-    });
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(AddEmployeeComponent, {
+  //     width: '500px',
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed' + result);
-      this.getEmployees();
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed' + result);
+  //     this.getEmployees();
+  //   });
+  // }
 
   getEmployees(): void {
     this.employeeService.getFIOs().subscribe(fio => this.employees = fio);
