@@ -14,26 +14,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-// API Routes
-app.get('/get_emp', async(req, res) => {
-    let empls = await user.getAllUsers();
-    res.json(empls);
-});
-
-app.get('/get_fios', async(req, res) => {
-    let item = await user.getFIOs();
-    res.json(item);
-});
-
-app.post('/add_emp', (req, res) => {
-    const data = req.body;
-    console.log(data);
-    user.addEmployee(data, (err, info) => {
-        if (err) throw err;
-        user.sendResponse(true, res);
-    });
-})
-
 app.post('/login', async function(req, res, nex) {
     const params = req.body;
     let users = null;
@@ -41,7 +21,7 @@ app.post('/login', async function(req, res, nex) {
     users = await user.getAllUsers();
 
     const filteredUsers = users.filter(u => {
-        return u.username === params.username &&
+        return u.email === params.email &&
                u.password === params.password;
     })
 
@@ -49,16 +29,38 @@ app.post('/login', async function(req, res, nex) {
         let user = filteredUsers[0];
         res.json({
             id: user.id,
-            name: user.name,
-            surname: user.surname,
+            email: user.email,
+            fullName: user.fullName,
             token: 'fake-jwt-token'
         });
     } else {
-        res.statusMessage = "Username or password or role is incorrect";
-        res.status(400).end();
+        res.statusMessage = `This combination of email and password doesn't exist. Please try again.`;
+        res.status(202).end();
     }
 
 });
+
+// API Routes
+// app.get('/get_emp', async(req, res) => {
+//     let empls = await user.getAllUsers();
+//     res.json(empls);
+// });
+
+// app.get('/get_fios', async(req, res) => {
+//     let item = await user.getFIOs();
+//     res.json(item);
+// });
+
+// app.post('/add_emp', (req, res) => {
+//     const data = req.body;
+//     console.log(data);
+//     user.addEmployee(data, (err, info) => {
+//         if (err) throw err;
+//         user.sendResponse(true, res);
+//     });
+// })
+
+
 
 
 // app.post('/signup', async function(req, res, next) {

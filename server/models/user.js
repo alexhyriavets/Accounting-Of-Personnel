@@ -1,41 +1,39 @@
-var bcrypt = require('bcrypt');
 var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'coursework'
+    database: 'accounting-of-personnel_db'
 });
 
-
 connection.connect(function() {
-    console.log("Database connected");
+    console.log("Database connected successfully!");
 });
 
 module.exports.getAllUsers = () => {
     return new Promise((resolve, c) => {
-        connection.query('select * from users', (err, rows, fields) => {
-            if (err) return resolve(err);
-            resolve(rows);
+        connection.query('select * from user', (err, rows, fields) => {
+            if (err) return reject(err);
+            else resolve(rows);
         });
     });
 }
 
-module.exports.getFIOs = () => {
-    return new Promise ((resolve, reject) => {
-        connection.query('select * from person', (err, rows, fields) => {
-            if (err) {
-                return reject(err);
-            }
-            else resolve (rows); 
-        });
-    });
-}
+// module.exports.getFIOs = () => {
+//     return new Promise ((resolve, reject) => {
+//         connection.query('select * from person', (err, rows, fields) => {
+//             if (err) {
+//                 return reject(err);
+//             }
+//             else resolve (rows); 
+//         });
+//     });
+// }
 
-module.exports.addEmployee = (data, callback) => {
-    console.log(data);
-    connection.query('insert into person set ?', data, callback);
-}
+// module.exports.addEmployee = (data, callback) => {
+//     console.log(data);
+//     connection.query('insert into person set ?', data, callback);
+// }
 
 module.exports.sendResponse = function(success, res) {
     if (success) {

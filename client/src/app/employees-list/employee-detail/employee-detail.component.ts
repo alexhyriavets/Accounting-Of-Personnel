@@ -27,8 +27,8 @@ export class EmployeeDetailComponent implements OnInit {
   getEmployeeDetail() {
     const id = +this.route.snapshot.paramMap.get('id');
 
-    this.employeeService.getFIOsById(id)
-      .subscribe(emp => this.employees = emp);
+    // this.employeeService.getFIOsById(id)
+    //   .subscribe(emp => this.employees = emp);
   }
 
 }

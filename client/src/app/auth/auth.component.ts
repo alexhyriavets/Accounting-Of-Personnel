@@ -13,6 +13,7 @@ import { User } from './../models/user';
 export class AuthComponent implements OnInit {
   public user: User;
   private returnUrl: string;
+  public errors: any;
 
   constructor(
     private authService: AuthService,
@@ -26,21 +27,18 @@ export class AuthComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
     this.user = {
-      username: '',
+      email: '',
       password: '',
     };
   }
 
-  // here i can easy add an validation
+  // just signin, no matter what authService will return
   signin() {
-    this.authService.signin(this.user.username, this.user.password)
-    .subscribe(
-      data => {
-        this.router.navigate([this.returnUrl]);
-      },
-      error => {
-          alert(error);
-      });
+    this.authService.signin(this.user.email, this.user.password)
+      .subscribe(
+        data => this.router.navigate([this.returnUrl]),
+        error => this.errors = `This combination of email and password doesn't exist. Please try again.`
+      );
   }
 
 }

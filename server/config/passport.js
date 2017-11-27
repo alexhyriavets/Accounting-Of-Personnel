@@ -1,3 +1,5 @@
+// NOT IN USE, JUST EXAMPLE
+
 // config/passport.js
 
 // load all the things we need

@@ -44,7 +44,7 @@ export class AddEmployeeComponent implements OnInit {
     }
 
     // uncomment to add emplyees to database
-    this.employeeService.putEmployee(emp);
+    // this.employeeService.putEmployee(emp);
 
     this.rForm.reset();
   }

@@ -14,6 +14,7 @@ import { ShowErrorsComponent } from './shared/show-errors';
 import { EmployeeDetailComponent } from './employees-list/employee-detail/employee-detail.component';
 
 import { EmployeeService } from './shared/employee.service';
+import { ApiService } from './shared/api.service';
 import { AuthService } from './auth/auth.service';
 
 import { FilterPipe } from './employees-list/filter.pipe';
@@ -39,7 +40,7 @@ import { FilterPipe } from './employees-list/filter.pipe';
     ReactiveFormsModule,
   ],
   entryComponents: [ AddEmployeeComponent ],
-  providers: [ EmployeeService, HttpModule, AuthService ],
+  providers: [ EmployeeService, HttpModule, AuthService, ApiService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
