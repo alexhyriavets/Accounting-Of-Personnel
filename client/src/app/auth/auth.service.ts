@@ -5,6 +5,7 @@ import { Response } from '@angular/http';
 import { ApiService } from './../shared/api.service';
 
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
@@ -16,18 +17,16 @@ export class AuthService {
       .map(res => localStorage.setItem('session', 'wodkg5pdsm42'));
   }
 
+  getUsers(): Observable<any> {
+    return this.apiService.get('/login');
+  }
+
   logout(): void {
     localStorage.removeItem('session');
     this.router.navigate(['/signin']);
   }
 }
 
-// response => {
-//   const user = response.json();
-//   if (user && user.token) {
-//     localStorage.setItem('session', 'wodkg5pdsm42');
-//   }
-// }
 
 
 

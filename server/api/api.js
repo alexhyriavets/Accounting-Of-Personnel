@@ -5,6 +5,7 @@ app.use(cors());
 
 // Import User Module Containing Functions Related To User Data
 var user = require('../models/user');
+var employee = require('../models/employee');
 
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -40,6 +41,11 @@ app.post('/login', async function(req, res, nex) {
 
 });
 
+app.get('/get_employees', async (req, res) => {
+    let employees = await employee.getEmployees();
+    res.json(employees);
+});
+
 // API Routes
 // app.get('/get_emp', async(req, res) => {
 //     let empls = await user.getAllUsers();
@@ -59,9 +65,6 @@ app.post('/login', async function(req, res, nex) {
 //         user.sendResponse(true, res);
 //     });
 // })
-
-
-
 
 // app.post('/signup', async function(req, res, next) {
 //     let newUser = req.body;

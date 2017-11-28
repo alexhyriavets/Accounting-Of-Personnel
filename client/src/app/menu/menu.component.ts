@@ -15,14 +15,4 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(AddEmployeeComponent, {
-  //     width: '450px',
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed' + result);
-  //   });
-  // }
-
 }

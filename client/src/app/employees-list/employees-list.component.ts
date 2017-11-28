@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
 
 import { Employee } from './../models/employee';
 
@@ -13,22 +12,30 @@ import { EmployeeService } from './../shared/employee.service';
   styleUrls: ['./employees-list.component.sass']
 })
 export class EmployeesListComponent implements OnInit {
-  displayedRows = ['ID', 'Name', 'Sex', 'Adress'];
-  employees: Employee[];
+  displayedRows = ['# Tab', 'Name', 'Position', 'Subdivision', 'Department', 'arrivalDate'];
+  employees: any;
   searchText: string;
   loading = true;
 
   constructor(
     public employeeService: EmployeeService,
-    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.getEmployees();
   }
 
+  // TODO: format arrival date
   getEmployees(): void {
-    // this.employeeService.getFIOs().subscribe(fio => this.employees = fio);
+    this.employeeService.getEmployees()
+      .subscribe(employee => {
+        this.employees = employee;
+     //   this.employees = this.employees.map(item => this.employeeService.formatDate(item.arrival));
+      });
+
+    // console.log(this.employees.arrival);
+    // this.employees.map(item => this.employeeService.formatDate(item.arrival));
+
     this.loading = false;
   }
 

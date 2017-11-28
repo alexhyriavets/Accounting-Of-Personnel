@@ -6,7 +6,7 @@
     </mat-form-field>
   </div>
   <div class="table-wrap">
-    <mat-spinner *ngIf="loading"></mat-spinner>
+    <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
     <table class="table">
       <thead>
         <tr>
@@ -15,10 +15,12 @@
       </thead>
       <tbody *ngIf="employees">
         <tr *ngFor="let emp of employees | filter : searchText" routerLink="/detail/{{emp.id}}" class="row">
-          <td>{{ emp.id }}</td>
-          <td>{{ emp.FIO }}</td>
-          <td>{{ emp.Sex }}</td>
-          <td>{{ emp.Adress }}</td>
+          <td>{{ emp.tab }}</td>
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.position }}</td>
+          <td>{{ emp.department }}</td>
+          <td>{{ emp.subdivision }}</td>
+          <td>{{ emp.arrival }}</td>
         </tr>
       </tbody>
     </table>

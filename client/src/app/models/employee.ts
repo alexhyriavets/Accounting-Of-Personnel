@@ -1,11 +1,25 @@
-export class Employee {
-    firstName: string;
-    secondName: string;
+export class EmployeeDetail {
+    tab_number: number;
+    fullName: string;
     patronymic: string;
-    tab_number: string;
+    birthDate: string;
+    arrivalDate: string;
+    dismissalDate: string;
+    sex: string;
+    adress: string;
+    position: string;
     subdivision: string;
     department: string;
-    position: string;
+    salary: string;
     employment: string;
-    salary: number;
+    rate: number;
+}
+
+export class Employee {
+    tab_number: string;
+    fullName: string;
+    position: string;
+    department: string;
+    subdivision: string;
+    arrivalDate: string;
 }
