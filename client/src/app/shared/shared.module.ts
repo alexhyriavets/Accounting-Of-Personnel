@@ -13,6 +13,7 @@ import { MatButtonModule,
          MatIconModule,
          MatTableModule,
          MatProgressSpinnerModule,
+         MatSelectModule,
 } from '@angular/material';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { MatButtonModule,
         MatIconModule,
         MatTableModule,
         MatProgressSpinnerModule,
+        MatSelectModule,
     ],
     exports: [
         BrowserAnimationsModule,
@@ -43,6 +45,7 @@ import { MatButtonModule,
         MatIconModule,
         MatTableModule,
         MatProgressSpinnerModule,
+        MatSelectModule,
     ]
 })
 export class SharedModule { }

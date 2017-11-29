@@ -1,4 +1,29 @@
-<p *ngFor="let emp of employees">
-  {{ emp.id }}
-  {{ emp.FIO }}
-</p>
+<div class="container">
+    <mat-card *ngIf="employee">
+        <h2>{{ employee.name }} {{ employee.patronymic }}</h2>
+        <mat-card class="personal-wrap">
+            <h3>Personal Information</h3>
+            <ul>
+                <li>Date of Birthday: {{ employee.birthDate }}</li>
+                <li>Sex: {{ employee.sex }}</li>
+                <li>Location: {{ employee.adress }}</li>
+            </ul>
+        </mat-card>
+
+        <mat-card class="other-wrap">
+            <h3>Other Information</h3>
+            <ul>
+                <li>Date of Arrival: {{ employee.arrivalDate }}</li>
+                <li>Date of Dissmissal: {{ employee.dismissalDate }}</li>
+                <li>Position: {{ employee.position }}</li>
+                <li>Subdivision: {{ employee.subdivision }}</li>
+                <li>Department: {{ employee.department }}</li>
+                <li>Employment: {{ employee.employment }}</li>
+                <li>Rate: {{ employee.rate }}</li>
+                <li>Salary: {{ employee.salary }}</li>
+            </ul>
+        </mat-card>
+
+        
+    </mat-card>
+</div>

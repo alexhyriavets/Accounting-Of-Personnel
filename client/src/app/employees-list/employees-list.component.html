@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody *ngIf="employees">
-        <tr *ngFor="let emp of employees | filter : searchText" routerLink="/detail/{{emp.id}}" class="row">
+        <tr *ngFor="let emp of employees | filter : searchText" routerLink="/detail/{{emp.tab}}" class="row">
           <td>{{ emp.tab }}</td>
           <td>{{ emp.name }}</td>
           <td>{{ emp.position }}</td>

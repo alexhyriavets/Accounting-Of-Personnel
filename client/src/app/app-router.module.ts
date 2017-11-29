@@ -15,12 +15,12 @@ const routes: Routes = [
     { path: 'signin', component: AuthComponent },
     { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
     { path: 'add', component: AddEmployeeComponent },
-    { path: 'detail/:id', component: EmployeeDetailComponent }
+    { path: 'detail/:tab', component: EmployeeDetailComponent }
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes, { useHash: true })
     ],
     exports: [
         RouterModule

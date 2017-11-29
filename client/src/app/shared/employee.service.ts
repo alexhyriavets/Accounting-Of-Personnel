@@ -10,8 +10,24 @@ export class EmployeeService {
 
   constructor(private apiService: ApiService) { }
 
-  getEmployees(): Observable<Employee> {
+  getEmployees(): Observable<any> {
     return this.apiService.get('/get_employees');
+  }
+
+  getEmployeeDetail(tab): Observable<any> {
+    return this.apiService.post('/get_employeeDetail', { tab: tab });
+  }
+
+  getPositions(): Observable<any> {
+    return this.apiService.get('/get_positionsName');
+  }
+
+  getSubdivisions(): Observable<any> {
+    return this.apiService.get('/get_subdivisionsName');
+  }
+
+  getDepartmentsBySubdivision(subdivision): Observable<any> {
+    return this.apiService.post('/get_departmentsBySubdivision', { subdivision: subdivision });
   }
 
   formatDate(date): string {

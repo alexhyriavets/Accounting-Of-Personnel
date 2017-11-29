@@ -46,6 +46,30 @@ app.get('/get_employees', async (req, res) => {
     res.json(employees);
 });
 
+app.post('/get_employeeDetail', async (req, res) => {
+    const tab = req.body.tab;
+
+    let empDetails = await employee.getEmployeeDetail(tab);
+    res.json(empDetails);
+})
+
+app.get('/get_positionsName', async (req, res) => {
+    const positions = await employee.getPositions();
+    res.json(positions);
+})
+
+app.get('/get_subdivisionsName', async (req, res) => {
+    const subdivisions = await employee.getSubdivisions();
+    res.json(subdivisions);
+})
+
+app.post('/get_departmentsBySubdivision', async (req, res) => {
+    const subdivision = req.body.subdivision;
+    
+    const departments = await employee.getDepartmentsBySubdivision(subdivision);
+    res.json(departments);
+})
+
 // API Routes
 // app.get('/get_emp', async(req, res) => {
 //     let empls = await user.getAllUsers();

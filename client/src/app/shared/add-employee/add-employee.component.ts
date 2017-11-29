@@ -16,37 +16,59 @@ import { FormControl } from '@angular/forms/src/model';
 })
 export class AddEmployeeComponent implements OnInit {
   employee: any;
-  rForm: FormGroup;
-  name: string;
+  addForm: FormGroup;
+  positions: any;
+  subdivisions: any;
+  departments: any;
 
   constructor(
     private employeeService: EmployeeService,
     private formBuilder: FormBuilder
   ) {
-    this.rForm = formBuilder.group({
-      'FIO': [null, [Validators.required, CustomValidators.testFio]],
-      'Sex': [null, Validators.required],
-      'Date_of_Birth': [null, Validators.required],
-      'Adress': [null, Validators.required],
-      'Date_of_Dismissal': [null],
-      'Science_Degree': [null],
+    this.addForm = formBuilder.group({
+      'firstName': [null, [Validators.required]],
+      'secondName': [null, [Validators.required]],
+      'patronymic': [null, [Validators.required]],
+      'birthDate': [null, [Validators.required]],
+      'sex': [null, [Validators.required]],
+      'adress': [null, [Validators.required]],
+      'position': [null, [Validators.required]],
+      'subdivision': [null, [Validators.required]],
+      'department': [null, [Validators.required]],
+      'employment': [null, [Validators.required]],
+      'rate': [null, [Validators.required]],
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getPositions();
+    this.getSubdivisions();
+  }
+
+  onSubdivisionSelect(subdivision): void {
+    this.getDepartmentsBySubdivision(subdivision);
+  }
 
   addEmployee(emp) {
-    if (emp.Date_of_Birth) {
-      emp.Date_of_Birth = this.formatDate(emp.Date_of_Birth.toDateString());
-    }
-    if (emp.Date_of_Dismissal) {
-      emp.Date_of_Dismissal = this.formatDate(emp.Date_of_Dismissal.toDateString());
-    }
+    emp.birthDate = this.formatDate(emp.birthDate.toDateString());
+    console.log(emp);
 
-    // uncomment to add emplyees to database
-    // this.employeeService.putEmployee(emp);
+    this.addForm.reset();
+  }
 
-    this.rForm.reset();
+  getPositions(): void {
+    this.employeeService.getPositions()
+      .subscribe(position => this.positions = position);
+  }
+
+  getSubdivisions(): void {
+    this.employeeService.getSubdivisions()
+      .subscribe(subdiv => this.subdivisions = subdiv);
+  }
+
+  getDepartmentsBySubdivision(subdivision): void {
+    this.employeeService.getDepartmentsBySubdivision(subdivision)
+      .subscribe(dep => this.departments = dep);
   }
 
   formatDate(date): string {

@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./employee-detail.component.sass']
 })
 export class EmployeeDetailComponent implements OnInit {
-  employees = [];
+  employee: any;
 
   constructor(
     private employeeService: EmployeeService,
@@ -24,11 +24,15 @@ export class EmployeeDetailComponent implements OnInit {
     this.getEmployeeDetail();
   }
 
-  getEmployeeDetail() {
-    const id = +this.route.snapshot.paramMap.get('id');
-
-    // this.employeeService.getFIOsById(id)
-    //   .subscribe(emp => this.employees = emp);
+  getEmployeeDetail(): void {
+    const tab = +this.route.snapshot.paramMap.get('tab');
+    this.employeeService.getEmployeeDetail(tab)
+      .subscribe(data => {
+        data[0].arrivalDate = data[0].arrivalDate.slice(0, 10);
+        data[0].birthDate = data[0].birthDate.slice(0, 10);
+        data[0].dismissalDate = data[0].dismissalData ? data[0].dismissalDate.slice(0, 10) : '-';
+        this.employee = data[0];
+      });
   }
 
 }
