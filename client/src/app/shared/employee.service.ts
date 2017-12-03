@@ -5,10 +5,57 @@ import { Observable } from 'rxjs/Observable';
 
 import { Employee } from './../models/employee';
 
+import 'rxjs/add/operator/toPromise';
+
 @Injectable()
 export class EmployeeService {
 
   constructor(private apiService: ApiService) { }
+
+  addEmployeePrepare(employee): void {
+    const person = {
+      fullName: employee.firstName + ' ' + employee.secondName,
+      patronymic: employee.patronymic,
+      birthDate: employee.birthDate,
+      sex: employee.sex,
+      adress: employee.adress,
+      scienceDegree: employee.scienceDegree,
+    };
+
+    this.addPerson(person).subscribe();
+
+    employee.arrivalDate = this.getCurrentDate();
+
+    this.getPersonIdByName(person.fullName)
+      .toPromise()
+      .then((id) => {
+        const emp = {
+          tab_number: this.getRandomInt(10000, 99999),
+          arrivalDate: employee.arrivalDate,
+          dismissalDate: null,
+          employment: employee.employment,
+          rate: employee.rate,
+          subdivision_id: employee.subdivision,
+          department_id: employee.department,
+          position_code: employee.position,
+          person_id: id[0].id,
+        };
+
+        this.addEmployee(emp).subscribe();
+      });
+  }
+
+  addEmployee(emp): Observable<any> {
+    return this.apiService.post('/add_employee', emp);
+  }
+
+  addPerson(person): Observable<any> {
+    return this.apiService.post('/add_person', person);
+  }
+
+  getEmployeesCount(): Observable<any> {
+    return this.apiService.get('/get_employeesCount');
+  }
 
   getEmployees(): Observable<any> {
     return this.apiService.get('/get_employees');
@@ -28,6 +75,10 @@ export class EmployeeService {
 
   getDepartmentsBySubdivision(subdivision): Observable<any> {
     return this.apiService.post('/get_departmentsBySubdivision', { subdivision: subdivision });
+  }
+
+  getPersonIdByName(fullName): Observable<any> {
+    return this.apiService.post('/get_personIdByName', { fullName: fullName });
   }
 
   formatDate(date): string {
@@ -75,6 +126,28 @@ export class EmployeeService {
     }
 
     return year + '-' + month + '-' + day;
+  }
+
+  getCurrentDate(): string {
+    const currentDate = new Date();
+    let day = currentDate.getDay().toString();
+    let month = (currentDate.getMonth() + 1).toString();
+    const year = currentDate.getFullYear().toString();
+
+    if (+day < 10) {
+      day = '0' + day;
+    }
+    if (+month < 10) {
+      month = '0' + month;
+    }
+
+    return `${year}-${month}-${day}`;
+  }
+
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 
 }

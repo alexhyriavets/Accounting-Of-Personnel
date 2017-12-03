@@ -70,6 +70,44 @@ app.post('/get_departmentsBySubdivision', async (req, res) => {
     res.json(departments);
 })
 
+app.get('/get_employeesCount', async (req, res) => {
+    const count = await employee.getEmployeesCount();
+    res.json(count);
+})
+
+app.post('/add_person', (req, res) => {
+    const data = req.body;
+
+    employee.addPerson(data, (err, info) => {
+        if (err) throw err;
+        user.sendResponse(true, res);
+    });
+})
+
+app.post('/add_employee', (req, res) => {
+    const data = req.body;
+
+    employee.addEmployee(data, (err, info) => {
+        if (err) throw err;
+        user.sendResponse(true, res);
+    });
+})
+
+app.post('/get_personIdByName', async (req, res) => {
+    const fullName = req.body.fullName;
+
+    const id = await employee.getPersonIdByName(fullName);
+    res.json(id);
+})
+
+module.exports.sendResponse = function(success, res) {
+    if (success) {
+        res.send({ 'success': 'true' });
+    } else {
+        res.send({ 'success': 'false' });
+    }
+}
+
 // API Routes
 // app.get('/get_emp', async(req, res) => {
 //     let empls = await user.getAllUsers();
