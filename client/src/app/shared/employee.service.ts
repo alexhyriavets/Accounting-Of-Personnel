@@ -12,6 +12,10 @@ export class EmployeeService {
 
   constructor(private apiService: ApiService) { }
 
+  editEmployeeInfo(employeeInfo): Observable<any> {
+    return this.apiService.put('/edit_employeeInfo', employeeInfo);
+  }
+
   addEmployeePrepare(employee): void {
     const person = {
       fullName: employee.firstName + ' ' + employee.secondName,

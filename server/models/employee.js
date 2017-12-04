@@ -33,8 +33,9 @@ module.exports.getEmployeeDetail = (tab) => {
     const query = `
         select employee.tab_number tab, person.adress, person.fullName name, person.patronymic patronymic,
             person.birthDate, employee.arrivalDate, employee.dismissalDate, person.sex,
-            subdivision.name subdivision, department.name department, position.salary,
-            employee.employment, employee.rate, position.name position
+            subdivision.name subdivision, subdivision.id subdId, department.name department, position.salary,
+            employee.employment, employee.rate, position.name position, person.id personId,
+            person.scienceDegree scienceDegree
         from employee
         join person on (person_id = person.id)
         join subdivision on (subdivision_id = subdivision.id)
@@ -108,28 +109,16 @@ module.exports.getEmployeesCount = () => {
     });
 }
 
-// my values here is undefined
 module.exports.addPerson = function(data, callback) {
-    // const query = `
-    //     insert into person (fullname, patronymic, birthDate, sex, adress, scienceDegree) values
-    //     ('${data.fullName}', '${data.patronymic}', '${data.birthDate}',
-    //     '${data.sex}', '${data.adress}','${data.scienceDegree}');
-    // `;
-
-   // console.log(query);
-
     connection.query("INSERT INTO person SET ?", data, callback);
 }
 
-// position_code too long
 module.exports.addEmployee = (data, callback) => {
     const query = `
         insert into employee (tab_number, arrivalDate, dismissalDate, employment, rate, subdivision_id, department_id, person_id, position_code) values
         (${data.tab_number}, '${data.arrivalDate}', null, '${data.employment}', ${data.rate}, ${data.subdivision_id}, ${data.department_id}, ${data.person_id}, '${data.position_code}');
     `;
 
-   // console.log(query);
-//    connection.query("INSERT INTO employee SET ?", data, callback);
     connection.query(query, data, callback);
 }
 
@@ -138,6 +127,26 @@ module.exports.getPersonIdByName = (fullname) => {
         select person.id 
         from person
         where person.fullname = '${fullname}';    
+    `;
+
+    return new Promise ((resolve, reject) => {
+        connection.query(query, (err, rows, fields) => {
+            if (err) return reject(err);
+            else resolve(rows);
+        });
+    });
+}
+
+module.exports.editEmployeeInfo = (data, callback) => {
+    const query = `
+        update person, employee set 
+        fullName = '${data.name}',
+        patronymic = '${data.patronymic}',
+        birthDate = '${data.birthDate}',
+        sex = '${data.sex}',
+        adress = '${data.adress}',
+        scienceDegree = '${data.scienceDegree}' 
+        where id = ${data.personId} and tab_number = ${data.tab}
     `;
 
     return new Promise ((resolve, reject) => {

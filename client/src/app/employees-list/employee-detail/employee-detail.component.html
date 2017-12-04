@@ -1,31 +1,108 @@
 <div class="container">
     <mat-card *ngIf="employee">
-        <h2>{{ employee.name }} {{ employee.patronymic }}</h2>
+        <h2>
+            <label>
+                <mat-form-field>
+                    <input type="text" [(ngModel)]="employee.name" matInput>        
+                </mat-form-field>
+            </label>
+        </h2>
         <mat-card class="personal-wrap">
             <h3>Personal Information</h3>
             <ul>
-                <li>Date of Birthday: {{ employee.birthDate }}</li>
                 <li>
-                    Sex: {{ employee.sex }}
+                    <label>Date of Birthday:
+                        <mat-form-field>
+                            <input type="text" [(ngModel)]="employee.birthDate" matInput>
+                        </mat-form-field>
+                    </label>
                 </li>
-                <li>Location: {{ employee.adress }}</li>
+                <li>
+                    <label>Sex:
+                        <mat-form-field>
+                            <input type="text" [(ngModel)]="employee.sex" matInput maxlength="6">
+                        </mat-form-field>
+                    </label>
+                </li>
+                <li>
+                    <label>Location:
+                        <mat-form-field>
+                            <input type="text" [(ngModel)]="employee.adress" matInput>
+                        </mat-form-field>
+                    </label>
+                </li>
             </ul>
         </mat-card>
 
         <mat-card class="other-wrap">
             <h3>Other Information</h3>
             <ul>
-                <li>Date of Arrival: {{ employee.arrivalDate }}</li>
-                <li>Date of Dissmissal: {{ employee.dismissalDate }}</li>
-                <li>Position: {{ employee.position }}</li>
-                <li>Subdivision: {{ employee.subdivision }}</li>
-                <li>Department: {{ employee.department }}</li>
-                <li>Employment: {{ employee.employment }}</li>
-                <li>Rate: {{ employee.rate }}</li>
+                <li>
+                    <label>Date of Arrival:
+                        <mat-form-field>
+                            <input type="text" [(ngModel)]="employee.arrivalDate" matInput>
+                        </mat-form-field>
+                    </label>
+                </li>
+                <li>
+                    <label>Date of Dismissal:
+                        <mat-form-field>
+                            <input type="text" [(ngModel)]="employee.dismissalDate" matInput>
+                        </mat-form-field>
+                    </label>                    
+                </li>
+                <li>
+                    <label>Position:
+                        <mat-form-field *ngIf="positions">
+                            <mat-select [placeholder]="employee.position" [(ngModel)]="employee.position">
+                                <mat-option *ngFor="let position of positions" [value]="position.code">
+                                    {{ position.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </label>
+                </li>
+                <li>
+                    <label>Subdivision:
+                        <mat-form-field *ngIf="subdivisions">
+                            <mat-select (change)="getDepartmentsBySubdivision(employee.subdivision)" [placeholder]="employee.subdivision" [(ngModel)]="employee.subdivision">
+                                <mat-option *ngFor="let subdivision of subdivisions" [value]="subdivision.id">
+                                    {{ subdivision.subdivision }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </label>
+                </li>
+                <li>
+                    <label>Department
+                        <mat-form-field *ngIf="departments">
+                            <mat-select [placeholder]="employee.department" [(ngModel)]="employee.department">
+                                <mat-option *ngFor="let department of departments" [value]="department.id">
+                                    {{ department.name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </label>
+                </li>
+                <li>
+                    <label>Employment
+                        <mat-radio-group class="radio-wrap" [(ngModel)]="employee.employment">
+                            <mat-radio-button name="employment" value="staffer">Staffer</mat-radio-button>
+                            <mat-radio-button name="employment" value="moonlighter">Moonlighter</mat-radio-button>
+                        </mat-radio-group>
+                    </label>
+                </li>
+                <li>
+                    <label>Rate
+                        <mat-form-field>
+                            <input matInput type="number" [(ngModel)]="employee.rate">
+                        </mat-form-field>
+                    </label>
+                </li>
                 <li>Salary: {{ employee.salary }}</li>
             </ul>
         </mat-card>
 
-        
+        <button (click)="onSaveChanges()" mat-raised-button color="accent">Save changes</button>
     </mat-card>
 </div>

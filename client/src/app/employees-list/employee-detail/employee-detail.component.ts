@@ -13,6 +13,9 @@ import { Location } from '@angular/common';
 })
 export class EmployeeDetailComponent implements OnInit {
   employee: any;
+  positions: any;
+  subdivisions: any;
+  departments: any;
 
   constructor(
     private employeeService: EmployeeService,
@@ -22,6 +25,23 @@ export class EmployeeDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getEmployeeDetail();
+    this.getPositions();
+    this.getSubdivisions();
+  }
+
+  public getDepartmentsBySubdivision(subdivision): void {
+    this.employeeService.getDepartmentsBySubdivision(subdivision)
+      .subscribe(dep => this.departments = dep);
+  }
+
+  getSubdivisions(): void {
+    this.employeeService.getSubdivisions()
+      .subscribe(subdiv => this.subdivisions = subdiv);
+  }
+
+  getPositions(): void {
+    this.employeeService.getPositions()
+      .subscribe(position => this.positions = position);
   }
 
   getEmployeeDetail(): void {
@@ -32,7 +52,56 @@ export class EmployeeDetailComponent implements OnInit {
         data[0].birthDate = data[0].birthDate.slice(0, 10);
         data[0].dismissalDate = data[0].dismissalData ? data[0].dismissalDate.slice(0, 10) : '-';
         this.employee = data[0];
+        this.getDepartmentsBySubdivision(this.employee.subdId);
       });
+  }
+
+  getPositionCode(position): any {
+    let isFind = false;
+    for (const pos in this.positions) {
+      if (this.positions[pos].name === position) {
+        isFind = true;
+        return this.positions[pos].code;
+      }
+    }
+    if (!isFind) {
+      return position;
+    }
+  }
+
+  getSubdivisionId(subd): any {
+    let isFind = false;
+    for (const pos in this.subdivisions) {
+      if (this.subdivisions[pos].subdivision === subd) {
+        isFind = true;
+        return this.subdivisions[pos].id;
+      }
+    }
+    if (!isFind) {
+      return subd;
+    }
+  }
+
+  getDepartmentId(dep): any {
+    let isFind = false;
+
+    for (const pos in this.departments) {
+      if (this.departments[pos].name === dep) {
+        isFind = true;
+        return this.departments[pos].id;
+      }
+    }
+    if (!isFind) {
+      return dep;
+    }
+  }
+
+  onSaveChanges(): void {
+    this.employee.position = this.getPositionCode(this.employee.position);
+    this.employee.department = this.getDepartmentId(this.employee.department);
+    this.employee.subdivision = this.getSubdivisionId(this.employee.subdivision);
+    console.log(this.employee);
+    this.employeeService.editEmployeeInfo(this.employee).subscribe();
   }
 
 }

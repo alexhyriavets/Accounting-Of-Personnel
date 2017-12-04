@@ -100,6 +100,29 @@ app.post('/get_personIdByName', async (req, res) => {
     res.json(id);
 })
 
+app.put('/edit_employeeInfo', (req, res) => {
+    const data = req.body;
+
+    employee.editEmployeeInfo(data, (err, info) => {
+        if (err) throw err;
+        employee.sendResponse(true, res);
+    })
+})
+// app.put('/edit_disc', (req, res) => {
+//     var data = req.body;
+//     console.log(data);
+//     admin.findByDiscipline(data.name, function(err, rows, fields) {
+//         if (rows.length == 1) {
+//             admin.sendResponse(false, res);
+//         } else {
+//             admin.editDiscipline(data, function(err, info) {
+//                 if (err) throw err;
+//                 console.log(info);
+//                 admin.sendResponse(true, res);
+//             });
+//         };
+//     });
+// });
 module.exports.sendResponse = function(success, res) {
     if (success) {
         res.send({ 'success': 'true' });
@@ -236,21 +259,7 @@ module.exports.sendResponse = function(success, res) {
 //     });
 // });
 
-// app.put('/edit_disc', (req, res) => {
-//     var data = req.body;
-//     console.log(data);
-//     admin.findByDiscipline(data.name, function(err, rows, fields) {
-//         if (rows.length == 1) {
-//             admin.sendResponse(false, res);
-//         } else {
-//             admin.editDiscipline(data, function(err, info) {
-//                 if (err) throw err;
-//                 console.log(info);
-//                 admin.sendResponse(true, res);
-//             });
-//         };
-//     });
-// });
+
 
 // app.get('/get_topics', async(req, res) => {
 //     let topics = await admin.getTopics();
