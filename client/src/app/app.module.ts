@@ -16,8 +16,11 @@ import { EmployeeDetailComponent } from './employees-list/employee-detail/employ
 import { EmployeeService } from './shared/employee.service';
 import { ApiService } from './shared/api.service';
 import { AuthService } from './auth/auth.service';
+import { SubdivisionService } from './shared/subdivision.service';
 
 import { FilterPipe } from './employees-list/filter.pipe';
+import { FilterSubPipe } from './subdivisions-list/filter-sub.pipe';
+import { SubdivisionsListComponent } from './subdivisions-list/subdivisions-list.component';
 
 
 @NgModule({
@@ -27,8 +30,10 @@ import { FilterPipe } from './employees-list/filter.pipe';
     AddEmployeeComponent,
     MenuComponent,
     FilterPipe,
+    FilterSubPipe,
     ShowErrorsComponent,
-    EmployeeDetailComponent
+    EmployeeDetailComponent,
+    SubdivisionsListComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,7 @@ import { FilterPipe } from './employees-list/filter.pipe';
     ReactiveFormsModule,
   ],
   entryComponents: [ AddEmployeeComponent ],
-  providers: [ EmployeeService, HttpModule, AuthService, ApiService ],
+  providers: [ EmployeeService, HttpModule, AuthService, ApiService, SubdivisionService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

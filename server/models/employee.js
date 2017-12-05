@@ -145,8 +145,29 @@ module.exports.editEmployeeInfo = (data, callback) => {
         birthDate = '${data.birthDate}',
         sex = '${data.sex}',
         adress = '${data.adress}',
-        scienceDegree = '${data.scienceDegree}' 
+        scienceDegree = '${data.scienceDegree}',
+        arrivalDate = '${data.arrivalDate}',
+        employment = '${data.employment}',
+        position_code = '${data.position}',
+        rate = '${data.rate}',
+        department_id = '${data.department}',
+        subdivision_id = '${data.subdivision}'
         where id = ${data.personId} and tab_number = ${data.tab}
+    `;
+
+    return new Promise ((resolve, reject) => {
+        connection.query(query, (err, rows, fields) => {
+            if (err) return reject(err);
+            else resolve(rows);
+        });
+    });
+}
+
+module.exports.dismissEmployee = (data) => {
+    const query = `
+        update employee set
+        dismissalDate = '${data.dismissalDate}'
+        where tab_number = ${data.tab}
     `;
 
     return new Promise ((resolve, reject) => {

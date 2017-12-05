@@ -50,7 +50,7 @@ export class EmployeeDetailComponent implements OnInit {
       .subscribe(data => {
         data[0].arrivalDate = data[0].arrivalDate.slice(0, 10);
         data[0].birthDate = data[0].birthDate.slice(0, 10);
-        data[0].dismissalDate = data[0].dismissalData ? data[0].dismissalDate.slice(0, 10) : '-';
+        data[0].dismissalDate = data[0].dismissalDate !== null ? data[0].dismissalDate.slice(0, 10) : '-';
         this.employee = data[0];
         this.getDepartmentsBySubdivision(this.employee.subdId);
       });
@@ -100,8 +100,21 @@ export class EmployeeDetailComponent implements OnInit {
     this.employee.position = this.getPositionCode(this.employee.position);
     this.employee.department = this.getDepartmentId(this.employee.department);
     this.employee.subdivision = this.getSubdivisionId(this.employee.subdivision);
+
+    if (this.employee.dismissalDate === '-') {
+      this.employee.dismissalDate = null;
+    }
     console.log(this.employee);
     this.employeeService.editEmployeeInfo(this.employee).subscribe();
+  }
+
+  onDismiss(): void {
+    this.employee.dismissalDate = this.employeeService.getCurrentDate();
+    this.employeeService.dismissEmployee({
+      tab: this.employee.tab,
+      dismissalDate: this.employee.dismissalDate
+    })
+      .subscribe();
   }
 
 }

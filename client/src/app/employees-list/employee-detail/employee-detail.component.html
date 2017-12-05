@@ -1,12 +1,15 @@
 <div class="container">
     <mat-card *ngIf="employee">
-        <h2>
-            <label>
-                <mat-form-field>
-                    <input type="text" [(ngModel)]="employee.name" matInput>        
-                </mat-form-field>
-            </label>
-        </h2>
+        <div class="top-line">
+            <h2>
+                <label>
+                    <mat-form-field>
+                        <input type="text" [(ngModel)]="employee.name" matInput>        
+                    </mat-form-field>
+                </label>
+            </h2>
+            <button *ngIf="employee.dismissalDate === '-'" mat-raised-button color="warn" (click)="onDismiss()">Dismiss</button>
+        </div>  
         <mat-card class="personal-wrap">
             <h3>Personal Information</h3>
             <ul>

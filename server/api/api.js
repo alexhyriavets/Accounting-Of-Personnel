@@ -108,6 +108,16 @@ app.put('/edit_employeeInfo', (req, res) => {
         employee.sendResponse(true, res);
     })
 })
+
+app.put('/dissmis_employee', (req, res) => {
+    const data = req.body;
+
+    employee.dismissEmployee(data), (err, info) => {
+        if (err) throw err;
+        employee.sendResponse(true, res);
+    }
+})
+
 // app.put('/edit_disc', (req, res) => {
 //     var data = req.body;
 //     console.log(data);

@@ -85,6 +85,10 @@ export class EmployeeService {
     return this.apiService.post('/get_personIdByName', { fullName: fullName });
   }
 
+  dismissEmployee(data): Observable<any> {
+    return this.apiService.put('/dissmis_employee', data);
+  }
+
   formatDate(date): string {
     const day = date.slice(8, 10);
     const year = date.slice(11, 15);
