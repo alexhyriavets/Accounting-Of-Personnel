@@ -1,10 +1,35 @@
 <mat-card>
+
   <h2>List of Employees</h2>
+
   <div class="search-wrap">
     <mat-form-field>
       <input class="search" matInput [(ngModel)]="searchText" placeholder="Search">
     </mat-form-field>
   </div>
+
+  <label>Subdivision:
+      <mat-form-field *ngIf="subdivisions">
+          <mat-select placeholder="Choose subdivision to show" #searchSub (change)="onSubdivisionSelect(searchSub.value)">
+              <mat-option value="showAll">
+                All
+              </mat-option>
+              <mat-option *ngFor="let sub of subdivisions" [value]="sub.subdivision">
+                  {{ sub.subdivision }}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+  </label><br>
+
+  <label>Show only dismissed:
+    <mat-checkbox [(ngModel)]="isOnlyDismissed" (change)="onDismissedCheck()"></mat-checkbox>
+  </label><br><br>
+
+  <label>Show only with Science Degree:
+      <mat-checkbox [(ngModel)]="isOnlyScienceDegree" (change)="onScienceDegreeCheck()"></mat-checkbox>
+  </label>
+
+<br><br>
   <div class="table-wrap">
     <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
     <table class="table">
@@ -14,12 +39,12 @@
         </tr>
       </thead>
       <tbody *ngIf="employees">
-        <tr *ngFor="let emp of employees | filter : searchText" routerLink="/detail/{{emp.tab}}" class="row">
+        <tr *ngFor="let emp of currentEmployees | filter : searchText" routerLink="/detail/{{emp.tab}}" class="row">
           <td>{{ emp.tab }}</td>
           <td>{{ emp.name }}</td>
           <td>{{ emp.position }}</td>
-          <td>{{ emp.department }}</td>
           <td>{{ emp.subdivision }}</td>
+          <td>{{ emp.department }}</td>
           <td>{{ emp.arrival }}</td>
         </tr>
       </tbody>

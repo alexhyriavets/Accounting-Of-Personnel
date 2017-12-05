@@ -13,7 +13,9 @@ connection.connect(function() {
 
 module.exports.getEmployees = () => {
     const query = `
-        select employee.tab_number tab, person.fullName name, position.name position, department.name department, subdivision.name subdivision, employee.arrivalDate arrival
+        select employee.tab_number tab, person.fullName name, position.name position,
+            department.name department, subdivision.name subdivision, employee.arrivalDate arrival,
+            employee.dismissalDate dismissalDate, person.scienceDegree scienceDegree
         from employee
         join person on (person_id = person.id)
         join position on (position_code = position.code)
