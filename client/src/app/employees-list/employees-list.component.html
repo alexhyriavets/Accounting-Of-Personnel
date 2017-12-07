@@ -10,24 +10,29 @@
 
   <label>Subdivision:
       <mat-form-field *ngIf="subdivisions">
-          <mat-select placeholder="Choose subdivision to show" #searchSub (change)="onSubdivisionSelect(searchSub.value)">
+          <mat-select placeholder="Choose subdivision to show" #currentSubdivision
+                      (change)="onSubdivChange(currentSubdivision.value)" >            
               <mat-option value="showAll">
                 All
               </mat-option>
               <mat-option *ngFor="let sub of subdivisions" [value]="sub.subdivision">
-                  {{ sub.subdivision }}
+                {{ sub.subdivision }}
               </mat-option>
           </mat-select>
       </mat-form-field>
-  </label><br>
-
-  <label>Show only dismissed:
-    <mat-checkbox [(ngModel)]="isOnlyDismissed" (change)="onDismissedCheck()"></mat-checkbox>
+    </label><br><br>
+  
+  <label>Show only with Science Degree:
+    <mat-checkbox [(ngModel)]="hasScienceDegree"></mat-checkbox>
   </label><br><br>
 
-  <label>Show only with Science Degree:
-      <mat-checkbox [(ngModel)]="isOnlyScienceDegree" (change)="onScienceDegreeCheck()"></mat-checkbox>
-  </label>
+   <label>Show dismissed:
+    <mat-checkbox [(ngModel)]="isShowDismissed"></mat-checkbox>
+  </label><br><br>
+
+  <label>Retirement age:
+    <mat-checkbox [(ngModel)]="isOnlyRetirenmentAge"></mat-checkbox>
+  </label><br>
 
 <br><br>
   <div class="table-wrap">
@@ -39,7 +44,12 @@
         </tr>
       </thead>
       <tbody *ngIf="employees">
-        <tr *ngFor="let emp of currentEmployees | filter : searchText" routerLink="/detail/{{emp.tab}}" class="row">
+        <tr *ngFor="let emp of currentEmployees | filter: searchText 
+                                                | subdivFilter: hasScienceDegree
+                                                | dismissalFilter: isShowDismissed
+                                                | retirementFilter: isOnlyRetirenmentAge"
+             routerLink="/detail/{{emp.tab}}"
+             class="row">
           <td>{{ emp.tab }}</td>
           <td>{{ emp.name }}</td>
           <td>{{ emp.position }}</td>

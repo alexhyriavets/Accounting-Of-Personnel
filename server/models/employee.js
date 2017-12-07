@@ -15,7 +15,8 @@ module.exports.getEmployees = () => {
     const query = `
         select employee.tab_number tab, person.fullName name, position.name position,
             department.name department, subdivision.name subdivision, employee.arrivalDate arrival,
-            employee.dismissalDate dismissalDate, person.scienceDegree scienceDegree
+            employee.dismissalDate dismissalDate, person.scienceDegree scienceDegree,
+            person.birthDate birthDate
         from employee
         join person on (person_id = person.id)
         join position on (position_code = position.code)
@@ -140,6 +141,9 @@ module.exports.getPersonIdByName = (fullname) => {
 }
 
 module.exports.editEmployeeInfo = (data, callback) => {
+    if (data.dismissalDate !== null) {
+        data.dismissalDate = `'${data.dismissalDate}'`;
+    }
     const query = `
         update person, employee set 
         fullName = '${data.name}',
@@ -149,6 +153,7 @@ module.exports.editEmployeeInfo = (data, callback) => {
         adress = '${data.adress}',
         scienceDegree = '${data.scienceDegree}',
         arrivalDate = '${data.arrivalDate}',
+        dismissalDate = ${data.dismissalDate},
         employment = '${data.employment}',
         position_code = '${data.position}',
         rate = '${data.rate}',

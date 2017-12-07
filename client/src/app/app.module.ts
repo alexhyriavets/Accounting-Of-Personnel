@@ -19,6 +19,9 @@ import { AuthService } from './auth/auth.service';
 import { SubdivisionService } from './shared/subdivision.service';
 
 import { FilterPipe } from './employees-list/filter.pipe';
+import { DismissalFilterPipe } from './employees-list/filter.pipe';
+import { RetirementFilterPipe } from './employees-list/filter.pipe';
+import { SubdivFilterPipe } from './employees-list/filter.pipe';
 import { FilterSubPipe } from './subdivisions-list/filter-sub.pipe';
 import { SubdivisionsListComponent } from './subdivisions-list/subdivisions-list.component';
 
@@ -31,6 +34,9 @@ import { SubdivisionsListComponent } from './subdivisions-list/subdivisions-list
     MenuComponent,
     FilterPipe,
     FilterSubPipe,
+    SubdivFilterPipe,
+    DismissalFilterPipe,
+    RetirementFilterPipe,
     ShowErrorsComponent,
     EmployeeDetailComponent,
     SubdivisionsListComponent
