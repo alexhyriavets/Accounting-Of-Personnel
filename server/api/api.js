@@ -70,6 +70,28 @@ app.post('/get_departmentsBySubdivision', async (req, res) => {
     res.json(departments);
 })
 
+app.post('/get_staffing', async (req, res) => {
+    const subdivision = req.body.subdivision;
+
+    const staffing = await employee.getStaffing(subdivision);
+
+    const staff = {
+        subdivision: staffing[0].subdivision,
+        info: [],
+    };
+
+    for (let i = 0; i < staffing.length; i++) {
+        staff.info.push({
+            position: staffing[i].position,
+            count: staffing[i].count
+        });
+    }
+    
+    console.log(staff);
+
+    res.json(staffing);
+})
+
 app.get('/get_employeesCount', async (req, res) => {
     const count = await employee.getEmployeesCount();
     res.json(count);
@@ -117,6 +139,8 @@ app.put('/dissmis_employee', (req, res) => {
         employee.sendResponse(true, res);
     }
 })
+
+
 
 // app.put('/edit_disc', (req, res) => {
 //     var data = req.body;

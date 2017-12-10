@@ -6,7 +6,7 @@ import { AuthComponent } from './auth/auth.component';
 import { MenuComponent } from './menu/menu.component';
 import { AddEmployeeComponent } from './shared/add-employee/add-employee.component';
 import { EmployeeDetailComponent } from './employees-list/employee-detail/employee-detail.component';
-import { SubdivisionsListComponent } from './subdivisions-list/subdivisions-list.component';
+import { StaffingComponent } from './staffing/staffing.component';
 
 import { AuthGuard } from './auth/auth.guard';
 
@@ -16,7 +16,7 @@ const routes: Routes = [
     { path: 'signin', component: AuthComponent },
     { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
     { path: 'add', component: AddEmployeeComponent },
-    { path: 'subdivisions', component: SubdivisionsListComponent },
+    { path: 'staffing', component: StaffingComponent },
     { path: 'detail/:tab', component: EmployeeDetailComponent },
 ];
 

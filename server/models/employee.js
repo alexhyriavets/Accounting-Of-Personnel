@@ -184,3 +184,24 @@ module.exports.dismissEmployee = (data) => {
         });
     });
 }
+
+module.exports.getStaffing = (subdivision) => {
+    const query = `
+        select count(*) count, subdivision.name subdivision, position.name position
+        from employee
+            join subdivision on (employee.subdivision_id = subdivision.id)
+            join position on (employee.position_code = position.code)
+        where subdivision.name = 'Lviv factory'
+        group by subdivision.name,
+                position.name;
+    `;
+
+    return new Promise ((resolve, reject) => {
+        connection.query(query, (err, rows, fields) => {
+            if (err) return reject(err);
+            else {
+                resolve(rows);
+            };
+        });
+    });
+}

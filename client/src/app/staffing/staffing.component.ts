@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { SubdivisionService } from './../shared/subdivision.service';
 
 @Component({
-  selector: 'app-subdivisions-list',
-  templateUrl: './subdivisions-list.component.html',
-  styleUrls: ['./subdivisions-list.component.sass']
+  selector: 'app-staffing',
+  templateUrl: './staffing.component.html',
+  styleUrls: ['./staffing.component.sass']
 })
-export class SubdivisionsListComponent implements OnInit {
+export class StaffingComponent implements OnInit {
   subdivisions: any;
   displayedRows = ['#', 'Name'];
   searchText: any;

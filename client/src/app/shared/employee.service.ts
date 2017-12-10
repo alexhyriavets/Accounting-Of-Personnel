@@ -12,6 +12,10 @@ export class EmployeeService {
 
   constructor(private apiService: ApiService) { }
 
+  getStaffing(subdivision): Observable<any>  {
+    return this.apiService.post('/get_staffing', { subdivision: subdivision });
+  }
+
   editEmployeeInfo(employeeInfo): Observable<any> {
     return this.apiService.put('/edit_employeeInfo', employeeInfo);
   }
