@@ -16,7 +16,9 @@
             </tr>
           </thead>
           <tbody *ngIf="subdivisions">
-            <tr *ngFor="let sub of subdivisions | filtersub : searchText" class="row">
+            <tr *ngFor="let sub of subdivisions | filtersub : searchText"
+                 class="row"
+                 routerLink="/staffing/{{ sub.id }}">
               <td>{{ sub.id }}</td>
               <td>{{ sub.subdivision }}</td>
             </tr>
