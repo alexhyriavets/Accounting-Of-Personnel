@@ -11,4 +11,12 @@ export class SubdivisionService {
     getAllSubdivisions(): Observable<any> {
         return this.apiService.get('/get_subdivisionsName');
     }
+
+    getStaffing(subdivision): Observable<any>  {
+        return this.apiService.post('/get_staffing', { subdivision: subdivision });
+    }
+
+    getPositionDetail(subId, posCode): Observable<any> {
+        return this.apiService.post('/get_posDet', { subId: subId, posCode: posCode });
+    }
 }

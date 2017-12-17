@@ -9,7 +9,7 @@ import { SubdivisionService } from './../shared/subdivision.service';
 })
 export class StaffingComponent implements OnInit {
   subdivisions: any;
-  displayedRows = ['#', 'Name'];
+  displayedRows = ['#', 'Subdivision', 'Count of Employees'];
   searchText: any;
 
   constructor(private subdivisionService: SubdivisionService) { }

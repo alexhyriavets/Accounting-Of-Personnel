@@ -65,23 +65,17 @@ export class RetirementFilterPipe implements PipeTransform {
     const date = new Date();
     const curYear = date.getFullYear();
 
+    console.log(items);
+
     if (isOnlyRetirenmentAge) {
       return items.filter(item => {
         const birthYear = +item.birthDate.slice(0, 4);
         if (item.sex === 'female') {
           console.log(`cur = ${curYear} birth = ${birthYear} subrt = ${curYear - birthYear}`);
-          if (curYear - birthYear > 55) {
-            return true;
-          } else {
-            return false;
-          }
+          return curYear - birthYear > 55;
         } else {
           console.log('male');
-          if (curYear - birthYear > 60) {
-            return true;
-          } else {
-            return false;
-          }
+          return curYear - birthYear > 60;
         }
       });
     } else {

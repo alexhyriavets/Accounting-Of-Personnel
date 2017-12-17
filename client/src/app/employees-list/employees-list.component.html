@@ -15,8 +15,8 @@
               <mat-option value="showAll">
                 All
               </mat-option>
-              <mat-option *ngFor="let sub of subdivisions" [value]="sub.subdivision">
-                {{ sub.subdivision }}
+              <mat-option *ngFor="let sub of subdivisions" [value]="sub.name">
+                {{ sub.name }}
               </mat-option>
           </mat-select>
       </mat-form-field>

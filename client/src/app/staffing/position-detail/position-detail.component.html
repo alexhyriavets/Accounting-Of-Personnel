@@ -1,0 +1,31 @@
+<mat-card>
+  <h2>Staffing</h2>
+
+  <div class="search-wrap">
+      <mat-form-field>
+        <input class="search" matInput [(ngModel)]="searchText" placeholder="Search">
+      </mat-form-field>
+    </div>
+
+  <div class="table-wrap">
+      <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th *ngFor="let row of displayedRows">{{ row }}</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="employees">
+          <tr *ngFor="let emp of employees | filtersub : searchText"
+               class="row"
+               routerLink="/detail/{{ emp.tab_number }}">
+            <td>{{ emp.tab_number }}</td>
+            <td>{{ emp.fullName }}</td>
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.salary }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+</mat-card>

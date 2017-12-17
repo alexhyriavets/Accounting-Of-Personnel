@@ -1,6 +1,5 @@
 <mat-card *ngIf="staffing">
   <h2>{{ staffing.subdivision }}</h2>
-  <mat-card>
     <div class="table-wrap">
       <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
       <table class="table">
@@ -11,12 +10,12 @@
         </thead>
         <tbody *ngIf="staffing.info">
           <tr *ngFor="let staff of staffing.info | filtersub : searchText"
-               class="row">
+               class="row"
+               routerLink="/staffing/{{ id }}/{{ staff.code }}">
             <td>{{ staff.position }}</td>
             <td>{{ staff.count }}</td>
           </tr>
         </tbody>
       </table>
     </div>
-  </mat-card>
 </mat-card>

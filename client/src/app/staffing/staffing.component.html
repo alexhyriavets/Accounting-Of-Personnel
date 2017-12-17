@@ -1,11 +1,11 @@
 <mat-card>
     <h2>Staffing</h2>
   
-    <div class="search-wrap">
+    <!-- <div class="search-wrap">
         <mat-form-field>
           <input class="search" matInput [(ngModel)]="searchText" placeholder="Search">
         </mat-form-field>
-      </div>
+      </div> -->
   
     <div class="table-wrap">
         <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
@@ -20,7 +20,8 @@
                  class="row"
                  routerLink="/staffing/{{ sub.id }}">
               <td>{{ sub.id }}</td>
-              <td>{{ sub.subdivision }}</td>
+              <td>{{ sub.name }}</td>
+              <td>{{ sub.count }}</td>
             </tr>
           </tbody>
         </table>

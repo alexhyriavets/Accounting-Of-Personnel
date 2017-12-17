@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 export class StaffingDetailComponent implements OnInit {
   staffing: any;
   displayedRows = ['Position', 'Count'];
+  id = +this.route.snapshot.paramMap.get('id');
 
   constructor(
     private subdivisionService: SubdivisionService,
@@ -24,9 +25,7 @@ export class StaffingDetailComponent implements OnInit {
   }
 
   getStaffing(): void {
-    const id = +this.route.snapshot.paramMap.get('tab');
-
-    this.subdivisionService.getStaffing(id)
+    this.subdivisionService.getStaffing(this.id)
       .subscribe(item => this.staffing = item);
   }
 

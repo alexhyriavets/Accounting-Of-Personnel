@@ -24,6 +24,8 @@ import { RetirementFilterPipe } from './employees-list/filter.pipe';
 import { SubdivFilterPipe } from './employees-list/filter.pipe';
 import { FilterSubPipe } from './staffing/filter-sub.pipe';
 import { StaffingComponent } from './staffing/staffing.component';
+import { StaffingDetailComponent } from './staffing/staffing-detail/staffing-detail.component';
+import { PositionDetailComponent } from './staffing/position-detail/position-detail.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { StaffingComponent } from './staffing/staffing.component';
     RetirementFilterPipe,
     ShowErrorsComponent,
     EmployeeDetailComponent,
-    StaffingComponent
+    StaffingComponent,
+    StaffingDetailComponent,
+    PositionDetailComponent
   ],
   imports: [
     BrowserModule,

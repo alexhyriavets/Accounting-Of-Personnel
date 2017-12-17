@@ -72,7 +72,7 @@ export class EmployeeDetailComponent implements OnInit {
   getSubdivisionId(subd): any {
     let isFind = false;
     for (const pos in this.subdivisions) {
-      if (this.subdivisions[pos].subdivision === subd) {
+      if (this.subdivisions[pos].name === subd) {
         isFind = true;
         return this.subdivisions[pos].id;
       }
