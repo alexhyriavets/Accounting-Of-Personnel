@@ -213,7 +213,6 @@ module.exports.getStaffing = (subdivision) => {
 }
 
 module.exports.getPositionDetail = (info) => {
-    console.log(info);
     const query = `
         select person.fullName, employee.tab_number, position.name, position.salary
         from employee
@@ -230,3 +229,12 @@ module.exports.getPositionDetail = (info) => {
         });
     });
 }
+
+// function sendQuery(query) {
+//         return new Promise ((resolve, reject) => {
+//         connection.query(query, (err, rows, fields) => {
+//             if (err) return reject(err);
+//             else resolve(rows);
+//         });
+//     });
+// }

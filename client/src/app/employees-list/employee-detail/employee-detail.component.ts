@@ -51,6 +51,8 @@ export class EmployeeDetailComponent implements OnInit {
         data[0].arrivalDate = data[0].arrivalDate.slice(0, 10);
         data[0].birthDate = data[0].birthDate.slice(0, 10);
         data[0].dismissalDate = data[0].dismissalDate !== null ? data[0].dismissalDate.slice(0, 10) : '-';
+        console.log(data[0].scienceDegree);
+        data[0].scienceDegree = data[0].scienceDegree !== null ? data[0].scienceDegree : '-';
         this.employee = data[0];
         this.getDepartmentsBySubdivision(this.employee.subdId);
       });

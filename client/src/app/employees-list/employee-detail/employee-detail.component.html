@@ -36,6 +36,13 @@
                             </mat-form-field>
                         </label>
                     </li>
+                    <li>
+                        <label>Science Degree:
+                            <mat-form-field>
+                                <input type="text" [(ngModel)]="employee.scienceDegree" matInput>
+                            </mat-form-field>
+                        </label>
+                    </li>
                 </ul>
             </mat-card>
 
@@ -104,7 +111,7 @@
                             </mat-form-field>
                         </label>
                     </li>
-                    <li>Salary: {{ employee.salary }}</li>
+                    <li class="salary">Salary: {{ employee.salary }}</li>
                 </ul>
             </mat-card>
         </div>
