@@ -1,6 +1,7 @@
 <mat-card>
 
   <h2>List of Employees</h2>
+  
 
   <div class="search-wrap">
     <mat-form-field>
@@ -15,8 +16,8 @@
               <mat-option value="showAll">
                 All
               </mat-option>
-              <mat-option *ngFor="let sub of subdivisions" [value]="sub.subdivision">
-                {{ sub.subdivision }}
+              <mat-option *ngFor="let sub of subdivisions" [value]="sub.name">
+                {{ sub.name }}
               </mat-option>
           </mat-select>
       </mat-form-field>
@@ -33,6 +34,10 @@
   <label>Retirement age:
     <mat-checkbox [(ngModel)]="isOnlyRetirenmentAge"></mat-checkbox>
   </label><br>
+
+  <button class="topdf" mat-raised-button color="primary" (click)="exportToExcel()">
+      <i class="material-icons">print</i>
+  </button>
 
 <br><br>
   <div class="table-wrap">

@@ -5,8 +5,10 @@ import { Employee } from './../models/employee';
 import { AddEmployeeComponent } from './../shared/add-employee/add-employee.component';
 
 import { EmployeeService } from './../shared/employee.service';
+import { ExcelService } from '../shared/excel.service';
 
 import 'rxjs/add/operator/map';
+
 
 @Component({
   selector: 'app-employees-list',
@@ -26,6 +28,7 @@ export class EmployeesListComponent implements OnInit {
 
   constructor(
     public employeeService: EmployeeService,
+    private excelService: ExcelService
   ) { }
 
   ngOnInit() {
@@ -41,41 +44,6 @@ export class EmployeesListComponent implements OnInit {
     }
   }
 
-  // onShowDismissedChange(): void {
-  //   if (this.isShowDismissed) {
-  //     this.currentEmployees = this.employees;
-  //   }
-  // }
-
-  // onRetirementAgeCheck(): void {
-  // const date = new Date();
-  // const curYear = date.getFullYear();
-  // const birthYear = +this.employees[0].birthDate.slice(0, 4);
-  //   if (this.isOnlyRetirementAge) {
-  //     this.currentEmployees = this.currentEmployees.filter(emp => (curYear - +emp.birthDate.slice(0, 4)) > 55);
-  //   }
-  // }
-
-  // onScienceDegreeCheck(): void {
-  //   if (this.isOnlyScienceDegree) {
-  //     this.currentEmployees = this.currentEmployees.filter(emp => emp.scienceDegree !== null);
-  //   }
-  // }
-
-  // onSubdivisionSelect(searchSub: string = 'showAll'): void {
-  //   if (searchSub === 'showAll') {
-  //     this.currentEmployees = this.employees;
-  //     this.onScienceDegreeCheck();
-  //     this.onRetirementAgeCheck();
-  //     this.onShowDismissedChange();
-  //   } else {
-  //     this.currentEmployees = this.employees.filter(emp => emp.subdivision.includes(searchSub));
-  //     this.onScienceDegreeCheck();
-  //     this.onRetirementAgeCheck();
-  //     this.onShowDismissedChange();
-  //   }
-  // }
-
   getSubdivisions(): void {
     this.employeeService.getSubdivisions()
       .subscribe(subdiv => this.subdivisions = subdiv);
@@ -90,6 +58,10 @@ export class EmployeesListComponent implements OnInit {
       });
 
     this.loading = false;
+  }
+
+  exportToExcel(): void {
+    this.excelService.exportAsExcelFile(this.currentEmployees, 'employees');
   }
 
 }

@@ -1,9 +1,9 @@
-<mat-card *ngIf="staffing">
-  <h2>{{ staffing.subdivision }}</h2>
+<mat-card>
+  <h2>Staffing</h2>
   <button class="topdf" mat-raised-button color="primary" (click)="exportToExcel()">
       <i class="material-icons">print</i>
   </button>
-    <div class="table-wrap">
+  <div class="table-wrap">
       <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
       <table class="table">
         <thead>
@@ -11,14 +11,17 @@
             <th *ngFor="let row of displayedRows">{{ row }}</th>
           </tr>
         </thead>
-        <tbody *ngIf="staffing.info">
-          <tr *ngFor="let staff of staffing.info | filtersub : searchText"
+        <tbody *ngIf="employees">
+          <tr *ngFor="let emp of employees | filtersub : searchText"
                class="row"
-               routerLink="/staffing/{{ id }}/{{ staff.code }}">
-            <td>{{ staff.position }}</td>
-            <td>{{ staff.count }}</td>
+               routerLink="/detail/{{ emp.tab_number }}">
+            <td>{{ emp.tab_number }}</td>
+            <td>{{ emp.fullName }}</td>
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.salary }}</td>
           </tr>
         </tbody>
       </table>
     </div>
+
 </mat-card>

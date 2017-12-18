@@ -26,9 +26,9 @@ export class AddEmployeeComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.addForm = formBuilder.group({
-      'firstName': [null, [Validators.required]],
-      'secondName': [null, [Validators.required]],
-      'patronymic': [null, [Validators.required]],
+      'firstName': [null, [Validators.required, Validators.pattern(/[a-zA-Z] /)]],
+      'secondName': [null, [Validators.required, Validators.pattern(/[a-zA-Z] /)]],
+      'patronymic': [null, [Validators.required, Validators.pattern(/[a-zA-Z] /)]],
       'birthDate': [null, [Validators.required]],
       'sex': [null, [Validators.required]],
       'adress': [null, [Validators.required]],

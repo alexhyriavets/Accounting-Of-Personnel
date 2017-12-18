@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SubdivisionService } from './../../shared/subdivision.service';
+
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ExcelService } from '../../shared/excel.service';
 
 @Component({
-  selector: 'app-staffing-detail',
-  templateUrl: './staffing-detail.component.html',
-  styleUrls: ['./staffing-detail.component.sass']
+  selector: 'app-position-detail',
+  templateUrl: './position-detail.component.html',
+  styleUrls: ['./position-detail.component.sass']
 })
-export class StaffingDetailComponent implements OnInit {
-  staffing: any;
-  displayedRows = ['Position', 'Count'];
+export class PositionDetailComponent implements OnInit {
   id = +this.route.snapshot.paramMap.get('id');
+  code = +this.route.snapshot.paramMap.get('code');
+  employees: any;
+  displayedRows = ['#', 'Name', 'Position', 'Salary'];
 
   constructor(
     private subdivisionService: SubdivisionService,
@@ -23,16 +25,16 @@ export class StaffingDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getStaffing();
+    this.getPositionDetail();
   }
 
-  getStaffing(): void {
-    this.subdivisionService.getStaffing(this.id)
-      .subscribe(item => this.staffing = item);
+  getPositionDetail(): void {
+    this.subdivisionService.getPositionDetail(this.id, this.code)
+      .subscribe(data => this.employees = data);
   }
 
   exportToExcel(): void {
-    this.excelService.exportAsExcelFile([this.staffing], 'staffing');
+    this.excelService.exportAsExcelFile(this.employees, 'employeesStaffing');
   }
 
 }

@@ -16,7 +16,7 @@ module.exports.getEmployees = () => {
         select employee.tab_number tab, person.fullName name, position.name position,
             department.name department, subdivision.name subdivision, employee.arrivalDate arrival,
             employee.dismissalDate dismissalDate, person.scienceDegree scienceDegree,
-            person.birthDate birthDate
+            person.birthDate birthDate, person.sex
         from employee
         join person on (person_id = person.id)
         join position on (position_code = position.code)
@@ -71,8 +71,11 @@ module.exports.getPositions = () => {
 
 module.exports.getSubdivisions = () => {
     const query = `
-        select subdivision.name subdivision, subdivision.id id
-        from subdivision;
+        select count(*) count, subdivision.id, subdivision.name
+        from employee
+            join subdivision on (subdivision_id = subdivision.id)
+        group by subdivision_id,
+                subdivision.name;
     `;
     
     return new Promise ((resolve, reject) => {
@@ -144,6 +147,15 @@ module.exports.editEmployeeInfo = (data, callback) => {
     if (data.dismissalDate !== null) {
         data.dismissalDate = `'${data.dismissalDate}'`;
     }
+    if (data.dismissalDate === '') {
+        data.dismissalDate = null;
+    }
+    if (data.scienceDegree !== null) {
+        data.scienceDegree = `'${data.scienceDegree}'`;
+    }
+    if (data.scienceDegree === '') {
+        data.scienceDegree = null;
+    }
     const query = `
         update person, employee set 
         fullName = '${data.name}',
@@ -151,7 +163,7 @@ module.exports.editEmployeeInfo = (data, callback) => {
         birthDate = '${data.birthDate}',
         sex = '${data.sex}',
         adress = '${data.adress}',
-        scienceDegree = '${data.scienceDegree}',
+        scienceDegree = ${data.scienceDegree},
         arrivalDate = '${data.arrivalDate}',
         dismissalDate = ${data.dismissalDate},
         employment = '${data.employment}',
@@ -187,11 +199,11 @@ module.exports.dismissEmployee = (data) => {
 
 module.exports.getStaffing = (subdivision) => {
     const query = `
-        select count(*) count, subdivision.name subdivision, position.name position
+        select count(*) count, subdivision.name subdivision, position.name position, position.code
         from employee
             join subdivision on (employee.subdivision_id = subdivision.id)
             join position on (employee.position_code = position.code)
-        where subdivision.name = 'Lviv factory'
+        where subdivision.id = '${subdivision}'
         group by subdivision.name,
                 position.name;
     `;
@@ -205,3 +217,30 @@ module.exports.getStaffing = (subdivision) => {
         });
     });
 }
+
+module.exports.getPositionDetail = (info) => {
+    const query = `
+        select person.fullName, employee.tab_number, position.name, position.salary
+        from employee
+            join person on (person_id = person.id)
+            join position on (position_code = position.code)
+            join subdivision on (subdivision_id = subdivision.id)
+        where subdivision.id = ${info.subId} and position.code = "${info.posCode}";
+    `;
+
+    return new Promise ((resolve, reject) => {
+        connection.query(query, (err, rows, fields) => {
+            if (err) return reject(err);
+            else resolve(rows);
+        });
+    });
+}
+
+// function sendQuery(query) {
+//         return new Promise ((resolve, reject) => {
+//         connection.query(query, (err, rows, fields) => {
+//             if (err) return reject(err);
+//             else resolve(rows);
+//         });
+//     });
+// }

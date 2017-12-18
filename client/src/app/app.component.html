@@ -1,17 +1,15 @@
-<mat-card class="header-wrap">
-    <h1 class="page-title">Accounting of Personnel</h1>
-    <div *ngIf="this.router.url !== '/signin' && this.router.url !== '/menu'">
-        <i class="material-icons" (click)="onBack()">keyboard_backspace</i>
+<mat-toolbar class="header-wrap" color="primary">
+    <div class="controls">
+        <h1 routerLink="/menu" class="page-title">Accounting of Personnel</h1>
+        <div *ngIf="this.router.url !== '/signin' && this.router.url !== '/menu'">
+            <i class="material-icons" (click)="onBack()">keyboard_backspace</i>
+        </div>
+        <div class="info" *ngIf="this.router.url !== '/signin'">
+            <!-- <span>{{ authService.currentUser.name }} {{ authService.currentUser.surname }} </span> -->
+            <i class="material-icons" (click)="authService.logout()">exit_to_app</i>
     </div>
-    <div class="info" *ngIf="this.router.url !== '/signin'">
-        <!-- <span>{{ authService.currentUser.name }} {{ authService.currentUser.surname }} </span> -->
-        <i class="material-icons" (click)="authService.logout()">exit_to_app</i>
     </div>
-</mat-card>
+</mat-toolbar>
 
 <router-outlet></router-outlet>
 
-
-<mat-card class="footer">
-    <p>(C) Alex Hyiravets</p>
-</mat-card>

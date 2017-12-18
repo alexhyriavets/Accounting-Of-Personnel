@@ -4,6 +4,7 @@ import { EmployeeService } from './../../shared/employee.service';
 
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { ExcelService } from '../../shared/excel.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class EmployeeDetailComponent implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private excelService: ExcelService
   ) { }
 
   ngOnInit() {
@@ -51,6 +53,7 @@ export class EmployeeDetailComponent implements OnInit {
         data[0].arrivalDate = data[0].arrivalDate.slice(0, 10);
         data[0].birthDate = data[0].birthDate.slice(0, 10);
         data[0].dismissalDate = data[0].dismissalDate !== null ? data[0].dismissalDate.slice(0, 10) : '-';
+        data[0].scienceDegree = data[0].scienceDegree !== null ? data[0].scienceDegree : '';
         this.employee = data[0];
         this.getDepartmentsBySubdivision(this.employee.subdId);
       });
@@ -72,7 +75,7 @@ export class EmployeeDetailComponent implements OnInit {
   getSubdivisionId(subd): any {
     let isFind = false;
     for (const pos in this.subdivisions) {
-      if (this.subdivisions[pos].subdivision === subd) {
+      if (this.subdivisions[pos].name === subd) {
         isFind = true;
         return this.subdivisions[pos].id;
       }
@@ -104,6 +107,9 @@ export class EmployeeDetailComponent implements OnInit {
     if (this.employee.dismissalDate === '-') {
       this.employee.dismissalDate = null;
     }
+    if (this.employee.scienceDegree === '') {
+      this.employee.scienceDegree = null;
+    }
     console.log(this.employee);
     this.employeeService.editEmployeeInfo(this.employee).subscribe();
   }
@@ -115,6 +121,10 @@ export class EmployeeDetailComponent implements OnInit {
       dismissalDate: this.employee.dismissalDate
     })
       .subscribe();
+  }
+
+  exportToExcel(): void {
+    this.excelService.exportAsExcelFile([this.employee], 'detail');
   }
 
 }
