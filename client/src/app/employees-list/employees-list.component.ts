@@ -8,6 +8,7 @@ import { EmployeeService } from './../shared/employee.service';
 import { ExcelService } from '../shared/excel.service';
 
 import 'rxjs/add/operator/map';
+import { MenuService } from '../menu/menu.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class EmployeesListComponent implements OnInit {
 
   constructor(
     public employeeService: EmployeeService,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    public menuService: MenuService
   ) { }
 
   ngOnInit() {

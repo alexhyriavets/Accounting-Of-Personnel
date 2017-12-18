@@ -10,7 +10,7 @@ import { ExcelService } from '../shared/excel.service';
 })
 export class StaffingComponent implements OnInit {
   subdivisions: any;
-  displayedRows = ['#', 'Subdivision', 'Count of Employees'];
+  displayedRows = ['#', 'Subdivision', 'Count of Employees', 'Total Salary'];
   searchText: any;
 
   constructor(private subdivisionService: SubdivisionService, private excelService: ExcelService) { }

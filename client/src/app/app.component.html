@@ -1,15 +1,23 @@
 <mat-toolbar class="header-wrap" color="primary">
     <div class="controls">
-        <h1 routerLink="/menu" class="page-title">Accounting of Personnel</h1>
-        <div *ngIf="this.router.url !== '/signin' && this.router.url !== '/menu'">
+        <i class="material-icons" (click)="onMenuOpen()" *ngIf="this.router.url !== '/signin'">menu</i>
+        <h1 class="page-title" *ngIf="this.router.url !== '/start'">Accounting of Personnel</h1>
+        <div class="back-btn" *ngIf="this.router.url !== '/signin' && this.router.url !== '/start'">
             <i class="material-icons" (click)="onBack()">keyboard_backspace</i>
         </div>
         <div class="info" *ngIf="this.router.url !== '/signin'">
             <!-- <span>{{ authService.currentUser.name }} {{ authService.currentUser.surname }} </span> -->
             <i class="material-icons" (click)="authService.logout()">exit_to_app</i>
-    </div>
+        </div>
     </div>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
 
+<mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" [opened]="menuService.isOpenedMenu">
+      <app-menu></app-menu>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

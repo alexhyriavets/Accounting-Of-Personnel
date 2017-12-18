@@ -71,11 +71,12 @@ module.exports.getPositions = () => {
 
 module.exports.getSubdivisions = () => {
     const query = `
-        select count(*) count, subdivision.id, subdivision.name
+        select count(*) count, sum(position.salary) totalSalary, subdivision.id, subdivision.name
         from employee
             join subdivision on (subdivision_id = subdivision.id)
+            join position on (position_code = position.code)
         group by subdivision_id,
-                subdivision.name;
+                 subdivision.name;
     `;
     
     return new Promise ((resolve, reject) => {

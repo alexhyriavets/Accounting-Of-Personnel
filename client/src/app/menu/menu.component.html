@@ -1,7 +1,26 @@
-
 <div class="menu-wrap">
-  <h1>Menu</h1>
-  <button routerLink="/add" mat-raised-button color="primary">Add Employee</button>
-  <button routerLink="/list" mat-raised-button color="primary">List of Empolyees</button>
-  <button routerLink="/staffing" mat-raised-button color="primary">Staffing</button>
+  <h2>Menu</h2>
+  <mat-list>
+    <mat-list-item>
+       <button routerLink="/add" mat-button color="primary">Add Employee</button>
+    </mat-list-item>
+    <mat-list-item>
+      <button routerLink="/list" mat-button color="primary">List of Empolyees</button>
+    </mat-list-item>
+    <mat-list-item>
+       <button routerLink="/staffing" mat-button color="primary">Staffing</button>
+    </mat-list-item>
+  </mat-list>
 </div>
+  
+
+
+
+<!-- <mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" [opened]="menuService.isOpenedMenu">
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+  </mat-sidenav-content>
+</mat-sidenav-container> -->

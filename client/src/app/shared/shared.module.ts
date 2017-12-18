@@ -15,7 +15,10 @@ import { MatButtonModule,
          MatProgressSpinnerModule,
          MatSelectModule,
          MatCheckboxModule,
-         MatToolbarModule
+         MatToolbarModule,
+         MatExpansionModule,
+         MatSidenavModule,
+         MatListModule
 } from '@angular/material';
 
 @NgModule({
@@ -34,7 +37,10 @@ import { MatButtonModule,
         MatProgressSpinnerModule,
         MatSelectModule,
         MatCheckboxModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatExpansionModule,
+        MatSidenavModule,
+        MatListModule
     ],
     exports: [
         BrowserAnimationsModule,
@@ -51,7 +57,10 @@ import { MatButtonModule,
         MatProgressSpinnerModule,
         MatSelectModule,
         MatCheckboxModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatExpansionModule,
+        MatSidenavModule,
+        MatListModule
     ]
 })
 export class SharedModule { }

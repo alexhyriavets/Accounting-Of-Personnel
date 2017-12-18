@@ -18,6 +18,7 @@ import { ApiService } from './shared/api.service';
 import { AuthService } from './auth/auth.service';
 import { SubdivisionService } from './shared/subdivision.service';
 import { ExcelService } from './shared/excel.service';
+import { MenuService } from './menu/menu.service';
 
 import { FilterPipe } from './employees-list/filter.pipe';
 import { DismissalFilterPipe } from './employees-list/filter.pipe';
@@ -27,6 +28,7 @@ import { FilterSubPipe } from './staffing/filter-sub.pipe';
 import { StaffingComponent } from './staffing/staffing.component';
 import { StaffingDetailComponent } from './staffing/staffing-detail/staffing-detail.component';
 import { PositionDetailComponent } from './staffing/position-detail/position-detail.component';
+import { StartComponent } from './start/start.component';
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import { PositionDetailComponent } from './staffing/position-detail/position-det
     EmployeeDetailComponent,
     StaffingComponent,
     StaffingDetailComponent,
-    PositionDetailComponent
+    PositionDetailComponent,
+    StartComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,14 @@ import { PositionDetailComponent } from './staffing/position-detail/position-det
     ReactiveFormsModule,
   ],
   entryComponents: [ AddEmployeeComponent ],
-  providers: [ EmployeeService, HttpModule, AuthService, ApiService, SubdivisionService, ExcelService ],
+  providers: [ EmployeeService,
+               HttpModule,
+               AuthService,
+               ApiService,
+               SubdivisionService,
+               ExcelService,
+               MenuService
+              ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

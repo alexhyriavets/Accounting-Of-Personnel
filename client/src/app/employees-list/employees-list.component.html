@@ -1,15 +1,26 @@
+
 <mat-card>
-
-  <h2>List of Employees</h2>
-  
-
+  <div class="top-line-wrap">
+    <h2>List of Employees</h2>
+    <button class="topdf" mat-raised-button color="primary" (click)="exportToExcel()">
+      <i class="material-icons">print</i>
+    </button>  
+  </div>
   <div class="search-wrap">
     <mat-form-field>
       <input class="search" matInput [(ngModel)]="searchText" placeholder="Search">
     </mat-form-field>
   </div>
-
-  <label>Subdivision:
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Search filters
+      </mat-panel-title>
+      <mat-panel-description>
+        Show more
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <label>Subdivision:
       <mat-form-field *ngIf="subdivisions">
           <mat-select placeholder="Choose subdivision to show" #currentSubdivision
                       (change)="onSubdivChange(currentSubdivision.value)" >            
@@ -22,23 +33,20 @@
           </mat-select>
       </mat-form-field>
     </label><br><br>
-  
-  <label>Show only with Science Degree:
-    <mat-checkbox [(ngModel)]="hasScienceDegree"></mat-checkbox>
-  </label><br><br>
-
-   <label>Show dismissed:
-    <mat-checkbox [(ngModel)]="isShowDismissed"></mat-checkbox>
-  </label><br><br>
-
-  <label>Retirement age:
-    <mat-checkbox [(ngModel)]="isOnlyRetirenmentAge"></mat-checkbox>
-  </label><br>
-
-  <button class="topdf" mat-raised-button color="primary" (click)="exportToExcel()">
-      <i class="material-icons">print</i>
-  </button>
-
+            
+    <label>Show only with Science Degree:
+      <mat-checkbox [(ngModel)]="hasScienceDegree"></mat-checkbox>
+    </label><br><br>
+          
+    <label>Show dismissed:
+      <mat-checkbox [(ngModel)]="isShowDismissed"></mat-checkbox>
+    </label><br><br>
+          
+    <label>Retirement age:
+      <mat-checkbox [(ngModel)]="isOnlyRetirenmentAge"></mat-checkbox>
+    </label><br>
+  </mat-expansion-panel>
+         
 <br><br>
   <div class="table-wrap">
     <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
