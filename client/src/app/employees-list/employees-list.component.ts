@@ -5,8 +5,10 @@ import { Employee } from './../models/employee';
 import { AddEmployeeComponent } from './../shared/add-employee/add-employee.component';
 
 import { EmployeeService } from './../shared/employee.service';
+import { ExcelService } from '../shared/excel.service';
 
 import 'rxjs/add/operator/map';
+
 
 @Component({
   selector: 'app-employees-list',
@@ -26,6 +28,7 @@ export class EmployeesListComponent implements OnInit {
 
   constructor(
     public employeeService: EmployeeService,
+    private excelService: ExcelService
   ) { }
 
   ngOnInit() {
@@ -55,6 +58,10 @@ export class EmployeesListComponent implements OnInit {
       });
 
     this.loading = false;
+  }
+
+  exportToExcel(): void {
+    this.excelService.exportAsExcelFile(this.currentEmployees, 'employees');
   }
 
 }

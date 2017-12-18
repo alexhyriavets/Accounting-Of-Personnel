@@ -1,5 +1,6 @@
 <div class="container">
     <mat-card *ngIf="employee">
+        
         <div class="top-line">
             <h2>
                 <mat-form-field class="employee-title">
@@ -7,8 +8,11 @@
                 </mat-form-field>
             </h2>
             <div>
-                <button (click)="onSaveChanges()" mat-raised-button color="accent">Save changes</button>
-                <button *ngIf="employee.dismissalDate === '-'" mat-raised-button color="warn" (click)="onDismiss()">Dismiss</button>
+                <button class="topdf" mat-raised-button color="primary" (click)="exportToExcel()">
+                    <i class="material-icons">print</i>
+                </button>
+                <button (click)="onSaveChanges()" mat-raised-button color="primary">Save changes</button>
+                <button  mat-raised-button color="warn" (click)="onDismiss()">Dismiss</button>
             </div>
         </div>
         <div class="info-wrap">

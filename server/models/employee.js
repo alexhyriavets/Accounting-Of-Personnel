@@ -150,6 +150,12 @@ module.exports.editEmployeeInfo = (data, callback) => {
     if (data.dismissalDate === '') {
         data.dismissalDate = null;
     }
+    if (data.scienceDegree !== null) {
+        data.scienceDegree = `'${data.scienceDegree}'`;
+    }
+    if (data.scienceDegree === '') {
+        data.scienceDegree = null;
+    }
     const query = `
         update person, employee set 
         fullName = '${data.name}',
@@ -157,7 +163,7 @@ module.exports.editEmployeeInfo = (data, callback) => {
         birthDate = '${data.birthDate}',
         sex = '${data.sex}',
         adress = '${data.adress}',
-        scienceDegree = '${data.scienceDegree}',
+        scienceDegree = ${data.scienceDegree},
         arrivalDate = '${data.arrivalDate}',
         dismissalDate = ${data.dismissalDate},
         employment = '${data.employment}',

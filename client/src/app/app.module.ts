@@ -17,6 +17,7 @@ import { EmployeeService } from './shared/employee.service';
 import { ApiService } from './shared/api.service';
 import { AuthService } from './auth/auth.service';
 import { SubdivisionService } from './shared/subdivision.service';
+import { ExcelService } from './shared/excel.service';
 
 import { FilterPipe } from './employees-list/filter.pipe';
 import { DismissalFilterPipe } from './employees-list/filter.pipe';
@@ -55,7 +56,7 @@ import { PositionDetailComponent } from './staffing/position-detail/position-det
     ReactiveFormsModule,
   ],
   entryComponents: [ AddEmployeeComponent ],
-  providers: [ EmployeeService, HttpModule, AuthService, ApiService, SubdivisionService ],
+  providers: [ EmployeeService, HttpModule, AuthService, ApiService, SubdivisionService, ExcelService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

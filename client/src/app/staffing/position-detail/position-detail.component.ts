@@ -4,6 +4,7 @@ import { SubdivisionService } from './../../shared/subdivision.service';
 
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { ExcelService } from '../../shared/excel.service';
 
 @Component({
   selector: 'app-position-detail',
@@ -19,7 +20,8 @@ export class PositionDetailComponent implements OnInit {
   constructor(
     private subdivisionService: SubdivisionService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private excelService: ExcelService
   ) { }
 
   ngOnInit() {
@@ -29,6 +31,10 @@ export class PositionDetailComponent implements OnInit {
   getPositionDetail(): void {
     this.subdivisionService.getPositionDetail(this.id, this.code)
       .subscribe(data => this.employees = data);
+  }
+
+  exportToExcel(): void {
+    this.excelService.exportAsExcelFile(this.employees, 'employeesStaffing');
   }
 
 }

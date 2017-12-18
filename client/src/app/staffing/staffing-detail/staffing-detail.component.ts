@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SubdivisionService } from './../../shared/subdivision.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { ExcelService } from '../../shared/excel.service';
 
 @Component({
   selector: 'app-staffing-detail',
@@ -17,7 +18,8 @@ export class StaffingDetailComponent implements OnInit {
   constructor(
     private subdivisionService: SubdivisionService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private excelService: ExcelService
   ) { }
 
   ngOnInit() {
@@ -27,6 +29,10 @@ export class StaffingDetailComponent implements OnInit {
   getStaffing(): void {
     this.subdivisionService.getStaffing(this.id)
       .subscribe(item => this.staffing = item);
+  }
+
+  exportToExcel(): void {
+    this.excelService.exportAsExcelFile([this.staffing], 'staffing');
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SubdivisionService } from './../shared/subdivision.service';
+import { ExcelService } from '../shared/excel.service';
 
 @Component({
   selector: 'app-staffing',
@@ -12,7 +13,7 @@ export class StaffingComponent implements OnInit {
   displayedRows = ['#', 'Subdivision', 'Count of Employees'];
   searchText: any;
 
-  constructor(private subdivisionService: SubdivisionService) { }
+  constructor(private subdivisionService: SubdivisionService, private excelService: ExcelService) { }
 
   ngOnInit() {
     this.getSubdivisions();
@@ -21,6 +22,10 @@ export class StaffingComponent implements OnInit {
   getSubdivisions(): void {
     this.subdivisionService.getAllSubdivisions()
       .subscribe(sub => this.subdivisions = sub);
+  }
+
+  exportToExcel(): void {
+    this.excelService.exportAsExcelFile(this.subdivisions, 'staffing');
   }
 
 }
