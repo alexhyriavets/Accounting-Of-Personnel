@@ -18,7 +18,7 @@ export class AppComponent {
     public authService: AuthService,
     public router: Router,
     private location: Location,
-    private menuService: MenuService
+    public menuService: MenuService
   ) { }
 
   onMenuOpen(): void {
